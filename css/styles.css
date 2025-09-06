@@ -1,0 +1,28 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  margin: 0;
+}
+
+header {
+  background: #002583;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  color: #fff;
+  list-style: none;
+}
+
+.header-nav li a {
+  color: #fff;
+  text-decoration: none;
+}

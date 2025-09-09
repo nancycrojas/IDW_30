@@ -38,8 +38,8 @@ header h1 {
 }
 
 .header-nav li a:hover {
-  background: #eaf5fb;
-  color: #096da1;
+  background: #eff7fc;
+  color: #0a7db8;
 }
 
 .brand {
@@ -68,11 +68,95 @@ header h1 {
   flex-direction: column;
   line-height: 1.2;
 }
+
 .text-logo strong {
   font-size: 1rem;
-  color: #096da1;
+  color: #0a7db8;
 }
+
 .text-logo span {
   font-size: 0.85rem;
   color: #5e6a71;
+}
+
+main {
+  max-width: 900px;
+  margin: 26px auto 0 auto;
+  padding: 0 20px 20px;
+}
+
+section {
+  background: #ffffff;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(15, 41, 61, 0.08);
+  border-radius: 14px;
+  border: 1px solid #dbe7ef;
+}
+
+section h2 {
+  margin-top: 0;
+  color: #0a7db8;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.doctor-card {
+  box-sizing: border-box;
+  flex: 0 0 calc((100% - 40px) / 3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #dbe7ef;
+  border-radius: 12px;
+  padding: 16px 18px;
+  background: #fbfdff;
+  transition: transform 0.08s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(15, 41, 61, 0.12);
+  border-color: #b9d7e7;
+}
+
+.doctor-card h3 {
+  margin: 0 0 8px 0;
+  color: #24313a;
+  font-size: 1.1rem;
+}
+
+.doctor-card p {
+  margin: 6px 0;
+  color: #394852;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid #0a7db8;
+  color: #fff;
+  background: #0a7db8;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(15, 41, 61, 0.08);
+  transition: transform 0.08s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.doctor-card a {
+  text-decoration: none;
+}
+
+.btn-block {
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 12px;
 }

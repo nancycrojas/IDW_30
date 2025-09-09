@@ -269,3 +269,33 @@ footer {
 .note a:hover {
   text-decoration: underline;
 }
+
+.institucional {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #dbe7ef;
+  box-shadow: 0 8px 24px rgba(15, 41, 61, 0.08);
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+.institucional h2 {
+  color: #0a7db8;
+  margin-bottom: 16px;
+}
+
+.institucional h3 {
+  color: #096da1;
+  margin-top: 20px;
+}
+
+.institucional p,
+.institucional li {
+  color: #394852;
+  line-height: 1.6;
+}
+
+.institucional ul {
+  padding-left: 20px;
+}

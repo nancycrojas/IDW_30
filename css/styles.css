@@ -160,3 +160,12 @@ section h2 {
   box-sizing: border-box;
   margin-top: 12px;
 }
+
+footer {
+  background: #eff7fc;
+  color: #5e6a71;
+  text-align: center;
+  padding: 16px 10px;
+  font-size: 0.9rem;
+  border-top: 1px solid #dbe7ef;
+}

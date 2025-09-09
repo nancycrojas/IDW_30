@@ -1,28 +1,78 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: #fff;
+  background: #f6f9fb;
   margin: 0;
+  color: #24313a;
 }
 
 header {
-  background: #002583;
-  color: #fff;
+  background: linear-gradient(180deg, #ffffff 0%, #eff7fc 100%);
+  color: #24313a;
   padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #dbe7ef;
+}
+
+header h1 {
+  font-size: 18px;
 }
 
 .header-nav ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
-  color: #fff;
+  gap: 30px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .header-nav li a {
-  color: #fff;
+  color: #24313a;
   text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.header-nav li a:hover {
+  background: #eaf5fb;
+  color: #096da1;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(120% 120% at 30% 20%, #5ad1ff, #0a7db8);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 14px rgba(15, 41, 61, 0.12);
+}
+
+.text-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.text-logo strong {
+  font-size: 1rem;
+  color: #096da1;
+}
+.text-logo span {
+  font-size: 0.85rem;
+  color: #5e6a71;
 }

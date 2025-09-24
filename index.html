@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="css/styles.css" />
     <title>Centro Médico San Benjamin</title>
   </head>
@@ -52,76 +58,156 @@
           Contamos con un equipo de especialistas altamente calificados,
           comprometidos con tu salud y bienestar.
         </p>
-        <div class="cards-container">
-          <article class="doctor-card">
-            <h3>Dra. María Blanco</h3>
-            <p><strong>Especialidad: </strong>Pediatría</p>
-            <p>
-              <strong>Días y horarios de atención: </strong>Martes y viernes de
-              8 a 14 hs
-            </p>
-            <p><strong>Obra Social: </strong>Galeno</p>
-            <a class="btn btn-block" href="contacto.html">Pedir turno</a>
-          </article>
+        <div class="row g-4">
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img
+                class="card-img-top"
+                src="https://img.freepik.com/foto-gratis/estilo-vida-emociones-gente-concepto-casual-confiado-agradable-sonriente-mujer-asiatica-brazos-cruzados-pecho-seguro-listo-ayudar-escuchando-companeros-trabajo-participando-conversacion_1258-59335.jpg?semt=ais_hybrid&w=740&q=80"
+                alt="Dra. María Blanco"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Dra. María Blanco</h5>
+                <p class="card-text">
+                  <strong>Especialidad: </strong>Pediatría
+                </p>
+                <p class="card-text">
+                  <strong>Días y horarios: </strong>Mar y Vie 8-14 hs
+                </p>
+                <p class="card-text"><strong>Obra Social: </strong>Galeno</p>
+                <a href="contacto.html" class="btn btn-primary mt-auto w-100"
+                  >Pedir turno</a
+                >
+              </div>
+            </div>
+          </div>
 
-          <article class="doctor-card">
-            <h3>Dr. Cesar Rodriguez</h3>
-            <p><strong>Especialidad: </strong>Cardiología</p>
-            <p>
-              <strong>Días y horarios de atención: </strong>Viernes de 13 a 19
-              hs
-            </p>
-            <p><strong>Obra Social: </strong>OSDE</p>
-            <a class="btn btn-block" href="contacto.html">Pedir turno</a>
-          </article>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img
+                class="card-img-top"
+                src="https://media.istockphoto.com/id/1171169099/es/foto/hombre-con-brazos-cruzados-aislados-sobre-fondo-gris.jpg?s=612x612&w=0&k=20&c=8qDLKdLMm2i8DHXY6crX6a5omVh2IxqrOxJV2QGzgFg="
+                alt="Dr. Ejemplo"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Dr. Cesar Rodriguez</h5>
+                <p class="card-text">
+                  <strong>Especialidad: </strong>Cardiología
+                </p>
+                <p class="card-text">
+                  <strong>Días y horarios: </strong>Vie 13-19 hs
+                </p>
+                <p class="card-text"><strong>Obra Social: </strong>OSDE</p>
+                <a href="contacto.html" class="btn btn-primary mt-auto w-100"
+                  >Pedir turno</a
+                >
+              </div>
+            </div>
+          </div>
 
-          <article class="doctor-card">
-            <h3>Dra. Paula Ruiz</h3>
-            <p><strong>Especialidad: </strong>Dermatología</p>
-            <p>
-              <strong>Días y horarios de atención: </strong>Lunes y jueves de 14
-              a 17 hs
-            </p>
-            <p><strong>Obra Social: </strong>Galeno</p>
-            <a class="btn btn-block" href="contacto.html">Pedir turno</a>
-          </article>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img
+                class="card-img-top"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7hO0-U-sTiSgVlNcpAtPEXsy4ZO30dOptIQ&s"
+                alt="Dra. Paula Ruiz"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Dra. Paula Ruiz</h5>
+                <p class="card-text">
+                  <strong>Especialidad: </strong>Dermatología
+                </p>
+                <p class="card-text">
+                  <strong>Días y horarios: </strong>Lun y Jue 14-17 hs
+                </p>
+                <p class="card-text"><strong>Obra Social: </strong>Galeno</p>
+                <a href="contacto.html" class="btn btn-primary mt-auto w-100"
+                  >Pedir turno</a
+                >
+              </div>
+            </div>
+          </div>
 
-          <article class="doctor-card">
-            <h3>Dr. Andrés López</h3>
-            <p><strong>Especialidad: </strong>Neurología</p>
-            <p>
-              <strong>Días y horarios de atención: </strong>Lunes y miércoles de
-              9 a 13 hs
-            </p>
-            <p><strong>Obra Social: </strong>Swiss Medical</p>
-            <a class="btn btn-block" href="contacto.html">Pedir turno</a>
-          </article>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img
+                class="card-img-top"
+                src="https://media.istockphoto.com/id/1197686068/es/foto/retrato-serio-para-personas-mayores-en-estudio.jpg?s=612x612&w=0&k=20&c=yFo3RxNCAD02vpefOy2is65e0ffxTYZoAyALLeEg9kg="
+                alt="Dra. María Blanco"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Dr. Andrés López</h5>
+                <p class="card-text">
+                  <strong>Especialidad: </strong>Neurología
+                </p>
+                <p class="card-text">
+                  <strong>Días y horarios: </strong>Lun y Mié 9-13 hs
+                </p>
+                <p class="card-text">
+                  <strong>Obra Social: </strong>Swiss Medical
+                </p>
+                <a href="contacto.html" class="btn btn-primary mt-auto w-100"
+                  >Pedir turno</a
+                >
+              </div>
+            </div>
+          </div>
 
-          <article class="doctor-card">
-            <h3>Dra. Carolina Méndez</h3>
-            <p><strong>Especialidad: </strong>Ginecología</p>
-            <p>
-              <strong>Días y horarios de atención: </strong>Martes y jueves de
-              15 a 19 hs
-            </p>
-            <p><strong>Obra Social: </strong>OSDE</p>
-            <a class="btn btn-block" href="contacto.html">Pedir turno</a>
-          </article>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img
+                class="card-img-top"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgRS8YI2Iz18_uyxhi-yBOHcYYDdLLccplYA&s"
+                alt="Dra. María Blanco"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Dra. Carolina Méndez</h5>
+                <p class="card-text">
+                  <strong>Especialidad: </strong>Ginecología
+                </p>
+                <p class="card-text">
+                  <strong>Días y horarios: </strong>Mar y Jue 15-19 hs
+                </p>
+                <p class="card-text"><strong>Obra Social: </strong>OSDE</p>
+                <a href="contacto.html" class="btn btn-primary mt-auto w-100"
+                  >Pedir turno</a
+                >
+              </div>
+            </div>
+          </div>
 
-          <article class="doctor-card">
-            <h3>Dr. Ricardo Fernández</h3>
-            <p><strong>Especialidad: </strong>Traumatología</p>
-            <p>
-              <strong>Días y horarios de atención: </strong>Viernes de 9 a 17 hs
-            </p>
-            <p><strong>Obra Social: </strong>Galeno</p>
-            <a class="btn btn-block" href="contacto.html">Pedir turno</a>
-          </article>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img
+                class="card-img-top"
+                src="https://img.freepik.com/foto-gratis/apuesto-hombre-sonriente-confiado-manos-cruzadas-sobre-pecho_176420-18743.jpg"
+                alt="Dra. María Blanco"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Dr. Ricardo Fernández</h5>
+                <p class="card-text">
+                  <strong>Especialidad: </strong>Traumatología
+                </p>
+                <p class="card-text">
+                  <strong>Días y horarios: </strong>Vie 9-17 hs
+                </p>
+                <p class="card-text"><strong>Obra Social: </strong>Galeno</p>
+                <a href="contacto.html" class="btn btn-primary mt-auto w-100"
+                  >Pedir turno</a
+                >
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
     <footer>
       &copy; 2025 Centro Médico IDW 30 - Todos los derechos reservados.
     </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

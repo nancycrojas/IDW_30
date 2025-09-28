@@ -13,19 +13,55 @@
     <title>Centro Médico San Benjamin</title>
   </head>
   <body>
-    <header>
-      <a class="brand" href="index.html">
-        <div class="brand-logo">SB</div>
-        <div class="text-logo">
-          <strong>Centro Médico San Benjamin</strong>
-          <span>Salud integral y cercana</span>
+    <header class="p-4">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="index.html"
+          >
+            <div
+              class="brand-logo rounded-circle text-white d-grid justify-content-center align-items-center fw-bold"
+            >
+              SB
+            </div>
+            <div class="text-logo d-flex flex-column">
+              <strong class="brand-title">
+                <span class="d-inline d-md-none">
+                  <span class="d-block">Centro Médico</span>
+                  <span class="d-block">San Benjamin</span>
+                </span>
+                <span class="d-none d-md-inline"
+                  >Centro Médico San Benjamin</span
+                >
+              </strong>
+              <span>Salud integral y cercana</span>
+            </div>
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto header-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="contacto.html">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="institucional.html">Institucional</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </a>
-      <nav class="header-nav">
-        <ul>
-          <li><a href="contacto.html">Contacto</a></li>
-          <li><a href="institucional.html">Institucional</a></li>
-        </ul>
       </nav>
     </header>
     <main>
@@ -202,7 +238,7 @@
       </section>
     </main>
     <footer>
-      &copy; 2025 Centro Médico IDW 30 - Todos los derechos reservados.
+      &copy; 2025 Centro Médico San Benjamin - Todos los derechos reservados.
     </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

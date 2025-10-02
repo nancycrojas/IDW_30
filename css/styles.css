@@ -132,49 +132,61 @@ footer {
   font-size: 0.9rem;
   border-top: 1px solid #dbe7ef;
 }
+/*
+======================================================
+CÓDIGO MODIFICADO PARA COMPATIBILIDAD CON BOOTSTRAP
+======================================================
+*/
+
 .contacto {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 14px;
-  border: 1px solid #dbe7ef;
-  box-shadow: 0 8px 24px rgba(15, 41, 61, 0.08);
-  max-width: 600px;
-  margin: 30px auto;
+  /* Estas propiedades de caja ahora las manejan las clases de Bootstrap: 
+     'p-4', 'shadow', 'bg-white', 'rounded' */
+  background: initial; 
+  padding: initial; 
+  border-radius: initial; 
+  border: initial; 
+  box-shadow: initial; 
+  max-width: initial; /* Permitimos que col-lg-8 / col-md-10 maneje el ancho */
+  margin: initial; /* Permitimos que 'container my-5' maneje el margen */
 }
 
 .contacto h2 {
-  color: #0a7db8;
-  margin-bottom: 16px;
+  color: #0a7db8; /* Mantenemos el color de acento si lo deseas */
+  margin-bottom: initial; /* Permitimos que 'mb-4' de Bootstrap maneje el margen */
 }
 
+/* Neutralizamos el Flexbox antiguo para que el sistema Grid (row/col) funcione */
 .contacto form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: block; 
+  flex-direction: initial;
+  gap: initial;
 }
 
+/* Neutralizamos los estilos de input y textarea para que 'form-control' funcione */
 .contacto label {
-  font-weight: 600;
-  color: #24313a;
+  font-weight: 600; /* Puedes mantener este si quieres etiquetas en negrita */
+  color: #24313a; /* Mantienes tu color de texto */
 }
 
 .contacto input,
 .contacto textarea {
-  padding: 10px 12px;
-  border: 1px solid #cfe3ee;
-  border-radius: 10px;
-  font-size: 0.95rem;
+  padding: initial; 
+  border: initial;
+  border-radius: initial;
+  font-size: initial;
 }
 
+/* Neutralizamos los estilos de foco para usar los de Bootstrap */
 .contacto input:focus,
 .contacto textarea:focus {
-  outline: none;
-  border-color: #0a7db8;
-  box-shadow: 0 0 4px rgba(10, 125, 184, 0.3);
+  outline: initial; 
+  border-color: initial;
+  box-shadow: initial;
 }
 
+/* Neutralizamos el estilo del botón para que 'w-100' funcione */
 .contacto button {
-  align-self: flex-start;
+  align-self: initial;
 }
 
 .intro-professionals {

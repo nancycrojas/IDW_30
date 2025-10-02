@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <link rel="stylesheet" href="css/styles.css" />
-    <title>Centro Médico San Benjamin</title>
-  </head>
-  <body>
+    <title>Contacto - Centro Médico San Benjamin</title>
+</head>
+<body>
     <header class="p-4">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
@@ -54,10 +57,10 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto header-nav">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Inicio</a>
+                <a class="nav-link" href="index.html">Inicio</a> 
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="institucional.html">Institucional</a>
+                <a class="nav-link" href="institucional.html">Institucional</a> 
               </li>
             </ul>
           </div>
@@ -66,30 +69,124 @@
     </header>
 
     <main>
-      <section class="contacto">
-        <h2>Contacto</h2>
-        <form>
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" required />
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    
+                    <section class="contacto p-4 shadow bg-white rounded">
+                        <h2 class="text-center text-primary mb-4">Contáctanos para tu Consulta</h2>
+                        
+                        <div class="alert alert-danger alert-dismissible fade show d-none" role="alert" id="mensajeError">
+                            <strong>¡Error!</strong> Por favor, completa todos los campos obligatorios.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
 
-          <label for="email">Correo electrónico</label>
-          <input type="email" id="email" name="email" required />
+                        <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="mensajeExito">
+                            <strong>¡TURNO AGENDADO!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        
+                        <form id="formularioContacto">
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="email" name="email" required />
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="telefono" class="form-label">Número de Teléfono</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-phone"></i> +54</span>
+                                        <input type="tel" class="form-control" id="telefono" name="telefono" required placeholder="Ej: 11 5555 1234">
+                                    </div>
+                                </div>
 
-          <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                                <div class="col-md-6 mb-3">
+                                    <label for="obraSocial" class="form-label">Obra Social / Prepaga</label>
+                                    <select class="form-select" id="obraSocial" name="obraSocial">
+                                        <option selected value="particular">Particular / No tengo</option>
+                                        <option value="osde">OSDE</option>
+                                        <option value="swiss">Swiss Medical</option>
+                                        <option value="medicus">Medicus</option>
+                                        <option value="galeno">Galeno</option>
+                                        <option value="ioma">IOMA</option>
+                                        <option value="omint">Omint</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="mensaje" class="form-label">Mensaje</label>
+                                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
+                            </div>
 
-          <button type="submit" class="btn">Enviar</button>
-        </form>
-      </section>
+                            <button type="submit" class="btn btn-primary w-100">Enviar Mensaje</button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
-      &copy; 2025 Centro Médico San Benjamin - Todos los derechos reservados.
+        &copy; 2025 Centro Médico San Benjamin - Todos los derechos reservados.
     </footer>
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-  </body>
+
+    <script>
+        const formulario = document.getElementById('formularioContacto');
+        const alertaExito = document.getElementById('mensajeExito');
+        const alertaError = document.getElementById('mensajeError');
+        
+        formulario.addEventListener('submit', function(event) {
+            // Evitar el envío por defecto del formulario
+            event.preventDefault(); 
+            
+            // Ocultar cualquier alerta anterior
+            alertaExito.classList.add('d-none');
+            alertaError.classList.add('d-none');
+
+            // VALIDACIÓN MANUAL (usando la función nativa de HTML para verificar 'required')
+            // checkValidity() devuelve true si todos los campos requeridos están llenos y son válidos
+            if (!formulario.checkValidity()) {
+                // Si la validación falla (hay campos required vacíos)
+                alertaError.classList.remove('d-none');
+                
+                // Opcional: Agregar clase de Bootstrap para mostrar feedback visual en los campos
+                formulario.classList.add('was-validated'); 
+                
+                return; // Detener la función aquí
+            } 
+            
+            // Si la validación es exitosa (todos los campos requeridos están llenos)
+            
+            // 1. Mostrar la alerta de éxito
+            alertaExito.classList.remove('d-none');
+            
+            // 2. Limpiar todos los campos del formulario
+            formulario.reset();
+            
+            // Opcional: Quitar la clase de validación
+            formulario.classList.remove('was-validated'); 
+            
+            // Opcional: Ocultar la alerta automáticamente después de 5 segundos
+            setTimeout(() => {
+                alertaExito.classList.add('d-none');
+            }, 5000); 
+        });
+    </script>
+
+</body>
 </html>

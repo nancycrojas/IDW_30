@@ -132,40 +132,34 @@ footer {
   font-size: 0.9rem;
   border-top: 1px solid #dbe7ef;
 }
-/*
-======================================================
-CÓDIGO MODIFICADO PARA COMPATIBILIDAD CON BOOTSTRAP
-======================================================
-*/
 
 .contacto {
-  /* Estas propiedades de caja ahora las manejan las clases de Bootstrap: 
+  /* Estas propiedades de caja ahora se manejan con Bootstrap: 
      'p-4', 'shadow', 'bg-white', 'rounded' */
   background: initial; 
   padding: initial; 
   border-radius: initial; 
   border: initial; 
   box-shadow: initial; 
-  max-width: initial; /* Permitimos que col-lg-8 / col-md-10 maneje el ancho */
-  margin: initial; /* Permitimos que 'container my-5' maneje el margen */
+  max-width: initial; 
+  margin: initial; 
 }
 
 .contacto h2 {
-  color: #0a7db8; /* Mantenemos el color de acento si lo deseas */
-  margin-bottom: initial; /* Permitimos que 'mb-4' de Bootstrap maneje el margen */
+  color: #0a7db8; 
+  margin-bottom: initial; 
 }
 
-/* Neutralizamos el Flexbox antiguo para que el sistema Grid (row/col) funcione */
 .contacto form {
   display: block; 
   flex-direction: initial;
   gap: initial;
 }
 
-/* Neutralizamos los estilos de input y textarea para que 'form-control' funcione */
+
 .contacto label {
-  font-weight: 600; /* Puedes mantener este si quieres etiquetas en negrita */
-  color: #24313a; /* Mantienes tu color de texto */
+  font-weight: 600; 
+  color: #24313a; 
 }
 
 .contacto input,
@@ -176,7 +170,6 @@ CÓDIGO MODIFICADO PARA COMPATIBILIDAD CON BOOTSTRAP
   font-size: initial;
 }
 
-/* Neutralizamos los estilos de foco para usar los de Bootstrap */
 .contacto input:focus,
 .contacto textarea:focus {
   outline: initial; 
@@ -184,7 +177,6 @@ CÓDIGO MODIFICADO PARA COMPATIBILIDAD CON BOOTSTRAP
   box-shadow: initial;
 }
 
-/* Neutralizamos el estilo del botón para que 'w-100' funcione */
 .contacto button {
   align-self: initial;
 }

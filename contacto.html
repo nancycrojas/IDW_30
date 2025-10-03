@@ -70,9 +70,22 @@
 
     <main>
         <div class="container my-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-10">
-                    
+            <div class="row">
+                
+                <div class="col-lg-2 d-none d-lg-block"> 
+                    <div id="carouselLeft" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner rounded shadow-sm">
+                            <div class="carousel-item active">
+                                <img src="https://picsum.photos/id/839/300/600" class="d-block w-100" alt="Médico sonriendo">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://picsum.photos/id/844/300/600" class="d-block w-100" alt="Vista del consultorio">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8 col-md-12"> 
                     <section class="contacto p-4 shadow bg-white rounded">
                         <h2 class="text-center text-primary mb-4">Contáctanos para tu Consulta</h2>
                         
@@ -130,41 +143,23 @@
                             <button type="submit" class="btn btn-primary w-100">Enviar Mensaje</button>
                         </form>
                     </section>
+                </div> <div class="col-lg-2 d-none d-lg-block"> 
+                    <div id="carouselRight" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner rounded shadow-sm">
+                            <div class="carousel-item active">
+                                <img src="https://picsum.photos/id/621/300/600" class="d-block w-100" alt="Paciente y doctora">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://picsum.photos/id/622/300/600" class="d-block w-100" alt="Sala de espera moderna">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </main>
+                
+            </div> </div> </main>
 
-    <footer class="bg-light text-dark py-4 mt-5 border-top">
-      <div class="container text-center">
-        <p class="mb-1">
-          &copy; 2025 Centro Médico San Benjamin - Todos los derechos
-          reservados.
-        </p>
-        <p class="small mb-3">
-          Av. De Los Rusos 1200, Entre Ríos - Tel: (011) 5555-1234
-        </p>
-        <div>
-          <a
-            href="https://www.facebook.com"
-            target="_blank"
-            class="text-dark me-3"
-            ><i class="bi bi-facebook fs-4"></i
-          ></a>
-          <a
-            href="https://www.instagram.com"
-            target="_blank"
-            class="text-dark me-3"
-            ><i class="bi bi-instagram fs-4"></i
-          ></a>
-          <a
-            href="https://wa.me/541155551234"
-            target="_blank"
-            class="text-dark me-3"
-            ><i class="bi bi-whatsapp fs-4"></i
-          ></a>
-        </div>
-      </div>
+    <footer>
+        &copy; 2025 Centro Médico San Benjamin - Todos los derechos reservados.
     </footer>
     
     <script
@@ -179,42 +174,28 @@
         const alertaError = document.getElementById('mensajeError');
         
         formulario.addEventListener('submit', function(event) {
-            // Evitar el envío por defecto del formulario
             event.preventDefault(); 
             
-            // Ocultar cualquier alerta anterior
+            // Ocultar alertas anteriores
             alertaExito.classList.add('d-none');
             alertaError.classList.add('d-none');
 
-            // VALIDACIÓN MANUAL (usando la función nativa de HTML para verificar 'required')
-            // checkValidity() devuelve true si todos los campos requeridos están llenos y son válidos
+            // VALIDACIÓN: Si no es válido (faltan campos required)
             if (!formulario.checkValidity()) {
-                // Si la validación falla (hay campos required vacíos)
                 alertaError.classList.remove('d-none');
-                
-                // Opcional: Agregar clase de Bootstrap para mostrar feedback visual en los campos
-                formulario.classList.add('was-validated'); 
-                
-                return; // Detener la función aquí
+                formulario.classList.add('was-validated'); // Muestra feedback visual de Bootstrap
+                return;
             } 
             
-            // Si la validación es exitosa (todos los campos requeridos están llenos)
-            
-            // 1. Mostrar la alerta de éxito
+            // Si es válido (éxito)
             alertaExito.classList.remove('d-none');
-            
-            // 2. Limpiar todos los campos del formulario
             formulario.reset();
-            
-            // Opcional: Quitar la clase de validación
             formulario.classList.remove('was-validated'); 
             
-            // Opcional: Ocultar la alerta automáticamente después de 5 segundos
             setTimeout(() => {
                 alertaExito.classList.add('d-none');
             }, 5000); 
         });
     </script>
-
 </body>
 </html>

@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
     <link rel="stylesheet" href="css/styles.css" />
     <title>Contacto - Centro Médico San Benjamin</title>
-</head>
-<body>
+  </head>
+  <body>
     <header class="p-4">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
@@ -57,10 +60,10 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto header-nav">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Inicio</a> 
+                <a class="nav-link" href="index.html">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="institucional.html">Institucional</a> 
+                <a class="nav-link" href="institucional.html">Institucional</a>
               </li>
             </ul>
           </div>
@@ -69,99 +72,213 @@
     </header>
 
     <main>
-        <div class="container my-5">
-            <div class="row">
-                
-                <div class="col-lg-2 d-none d-lg-block"> 
-                    <div id="carouselLeft" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner rounded shadow-sm">
-                            <div class="carousel-item active">
-                                <img src="https://picsum.photos/id/839/300/600" class="d-block w-100" alt="Médico sonriendo">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://picsum.photos/id/844/300/600" class="d-block w-100" alt="Vista del consultorio">
-                            </div>
-                        </div>
-                    </div>
+      <div class="container my-5">
+        <div class="row">
+          <div class="col-lg-2 d-none d-lg-block">
+            <div
+              id="carouselLeft"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner rounded shadow-sm">
+                <div class="carousel-item active">
+                  <img
+                    src="https://picsum.photos/id/839/300/600"
+                    class="d-block w-100"
+                    alt="Médico sonriendo"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://picsum.photos/id/844/300/600"
+                    class="d-block w-100"
+                    alt="Vista del consultorio"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-8 col-md-12">
+            <section class="contacto p-4 shadow bg-white rounded">
+              <h2 class="text-center text-primary mb-4">
+                Contáctanos para tu Consulta
+              </h2>
+
+              <div
+                class="alert alert-danger alert-dismissible fade show d-none"
+                role="alert"
+                id="mensajeError"
+              >
+                <strong>¡Error!</strong> Por favor, completa todos los campos
+                obligatorios.
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <div
+                class="alert alert-success alert-dismissible fade show d-none"
+                role="alert"
+                id="mensajeExito"
+              >
+                <strong>¡TURNO AGENDADO!</strong>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <form id="formularioContacto">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nombre"
+                      name="nombre"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label"
+                      >Correo electrónico</label
+                    >
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      required
+                    />
+                  </div>
                 </div>
 
-                <div class="col-lg-8 col-md-12"> 
-                    <section class="contacto p-4 shadow bg-white rounded">
-                        <h2 class="text-center text-primary mb-4">Contáctanos para tu Consulta</h2>
-                        
-                        <div class="alert alert-danger alert-dismissible fade show d-none" role="alert" id="mensajeError">
-                            <strong>¡Error!</strong> Por favor, completa todos los campos obligatorios.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-
-                        <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="mensajeExito">
-                            <strong>¡TURNO AGENDADO!</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        
-                        <form id="formularioContacto">
-                            
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" required />
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Correo electrónico</label>
-                                    <input type="email" class="form-control" id="email" name="email" required />
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="telefono" class="form-label">Número de Teléfono</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-phone"></i> +54</span>
-                                        <input type="tel" class="form-control" id="telefono" name="telefono" required placeholder="Ej: 11 5555 1234">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                    <label for="obraSocial" class="form-label">Obra Social / Prepaga</label>
-                                    <select class="form-select" id="obraSocial" name="obraSocial">
-                                        <option selected value="particular">Particular / No tengo</option>
-                                        <option value="osde">OSDE</option>
-                                        <option value="swiss">Swiss Medical</option>
-                                        <option value="medicus">Medicus</option>
-                                        <option value="galeno">Galeno</option>
-                                        <option value="ioma">IOMA</option>
-                                        <option value="omint">Omint</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="mensaje" class="form-label">Mensaje</label>
-                                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary w-100">Enviar Mensaje</button>
-                        </form>
-                    </section>
-                </div> <div class="col-lg-2 d-none d-lg-block"> 
-                    <div id="carouselRight" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner rounded shadow-sm">
-                            <div class="carousel-item active">
-                                <img src="https://picsum.photos/id/621/300/600" class="d-block w-100" alt="Paciente y doctora">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://picsum.photos/id/622/300/600" class="d-block w-100" alt="Sala de espera moderna">
-                            </div>
-                        </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="telefono" class="form-label"
+                      >Número de Teléfono</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-phone"></i> +54</span
+                      >
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="telefono"
+                        name="telefono"
+                        required
+                        placeholder="Ej: 11 5555 1234"
+                      />
                     </div>
-                </div>
-                
-            </div> </div> </main>
+                  </div>
 
-    <footer>
-        &copy; 2025 Centro Médico San Benjamin - Todos los derechos reservados.
+                  <div class="col-md-6 mb-3">
+                    <label for="obraSocial" class="form-label"
+                      >Obra Social / Prepaga</label
+                    >
+                    <select
+                      class="form-select"
+                      id="obraSocial"
+                      name="obraSocial"
+                    >
+                      <option selected value="particular">
+                        Particular / No tengo
+                      </option>
+                      <option value="osde">OSDE</option>
+                      <option value="swiss">Swiss Medical</option>
+                      <option value="medicus">Medicus</option>
+                      <option value="galeno">Galeno</option>
+                      <option value="ioma">IOMA</option>
+                      <option value="omint">Omint</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="mensaje" class="form-label">Mensaje</label>
+                  <textarea
+                    class="form-control"
+                    id="mensaje"
+                    name="mensaje"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                  Enviar Mensaje
+                </button>
+              </form>
+            </section>
+          </div>
+          <div class="col-lg-2 d-none d-lg-block">
+            <div
+              id="carouselRight"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner rounded shadow-sm">
+                <div class="carousel-item active">
+                  <img
+                    src="https://picsum.photos/id/621/300/600"
+                    class="d-block w-100"
+                    alt="Paciente y doctora"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://picsum.photos/id/622/300/600"
+                    class="d-block w-100"
+                    alt="Sala de espera moderna"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-light text-dark py-4 mt-5 border-top">
+      <div class="container text-center">
+        <p class="mb-1">
+          &copy; 2025 Centro Médico San Benjamin - Todos los derechos
+          reservados.
+        </p>
+        <p class="small mb-3">
+          Av. De Los Rusos 1200, Entre Ríos - Tel: (011) 5555-1234
+        </p>
+        <div>
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            class="text-dark me-3"
+            ><i class="bi bi-facebook fs-4"></i
+          ></a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            class="text-dark me-3"
+            ><i class="bi bi-instagram fs-4"></i
+          ></a>
+          <a
+            href="https://wa.me/541155551234"
+            target="_blank"
+            class="text-dark me-3"
+            ><i class="bi bi-whatsapp fs-4"></i
+          ></a>
+        </div>
+      </div>
     </footer>
-    
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
@@ -169,33 +286,33 @@
     ></script>
 
     <script>
-        const formulario = document.getElementById('formularioContacto');
-        const alertaExito = document.getElementById('mensajeExito');
-        const alertaError = document.getElementById('mensajeError');
-        
-        formulario.addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            
-            // Ocultar alertas anteriores
-            alertaExito.classList.add('d-none');
-            alertaError.classList.add('d-none');
+      const formulario = document.getElementById("formularioContacto");
+      const alertaExito = document.getElementById("mensajeExito");
+      const alertaError = document.getElementById("mensajeError");
 
-            // VALIDACIÓN: Si no es válido (faltan campos required)
-            if (!formulario.checkValidity()) {
-                alertaError.classList.remove('d-none');
-                formulario.classList.add('was-validated'); // Muestra feedback visual de Bootstrap
-                return;
-            } 
-            
-            // Si es válido (éxito)
-            alertaExito.classList.remove('d-none');
-            formulario.reset();
-            formulario.classList.remove('was-validated'); 
-            
-            setTimeout(() => {
-                alertaExito.classList.add('d-none');
-            }, 5000); 
-        });
+      formulario.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Ocultar alertas anteriores
+        alertaExito.classList.add("d-none");
+        alertaError.classList.add("d-none");
+
+        // VALIDACIÓN: Si no es válido (faltan campos required)
+        if (!formulario.checkValidity()) {
+          alertaError.classList.remove("d-none");
+          formulario.classList.add("was-validated"); // Muestra feedback visual de Bootstrap
+          return;
+        }
+
+        // Si es válido (éxito)
+        alertaExito.classList.remove("d-none");
+        formulario.reset();
+        formulario.classList.remove("was-validated");
+
+        setTimeout(() => {
+          alertaExito.classList.add("d-none");
+        }, 5000);
+      });
     </script>
-</body>
+  </body>
 </html>

@@ -64,6 +64,12 @@
                 <a class="nav-link" href="institucional.html">Institucional</a>
               </li>
               <li class="nav-item">
+                <a id="saludoUsuario" class="nav-link"></a>
+              </li>
+              <li class="nav-item ms-lg-2">
+                <button id="btnLogout" class="btn btn-sm">Cerrar sesión</button>
+              </li>
+              <li class="nav-item">
                 <button id="btnTheme" class="btn btn-outline-dark ms-lg-4">
                   ⚫️
                 </button>
@@ -76,11 +82,7 @@
     <main class="container">
       <section class="mb-5">
         <h2 class="mb-3">Alta de Médicos</h2>
-        <form
-          action=""
-          id="altaMedicoForm"
-          class="border rounded p-4 shadow-sm"
-        >
+        <form id="altaMedicoForm" class="border rounded p-4 shadow-sm">
           <div class="mb-3">
             <label for="apellido" class="form-label">Apellido</label>
             <input type="text" class="form-control" id="apellido" required />

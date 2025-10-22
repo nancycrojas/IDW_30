@@ -25,3 +25,26 @@ btn.addEventListener("click", (e) => {
   applyTheme(next);
   localStorage.setItem(KEY, next);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const linkLogin = document.getElementById("linkLogin");
+  const btnLogout = document.getElementById("btnLogout");
+
+  const usuarioLogueado = sessionStorage.getItem("usuarioLogueado");
+
+  if (usuarioLogueado) {
+    const nombreCap =
+      usuarioLogueado.charAt(0).toUpperCase() +
+      usuarioLogueado.slice(1).toLowerCase();
+
+    linkLogin.textContent = `👋 Bienvenido/a ${nombreCap}`;
+    linkLogin.removeAttribute("href");
+
+    btnLogout.classList.remove("d-none");
+
+    btnLogout.addEventListener("click", () => {
+      sessionStorage.removeItem("usuarioLogueado");
+      window.location.reload();
+    });
+  }
+});

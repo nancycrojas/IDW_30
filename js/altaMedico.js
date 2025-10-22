@@ -42,3 +42,45 @@ function altaMedicos(event) {
 }
 
 formAltaMedico.addEventListener("submit", altaMedicos);
+
+document.addEventListener("DOMContentLoaded", () => {
+  let nombre = sessionStorage.getItem("usuarioLogueado") || "";
+
+  if (!nombre) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  const nombreCap =
+    nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
+
+  const saludo = document.getElementById("saludoUsuario");
+  if (saludo) {
+    saludo.textContent = `👋 Bienvenido/a ${nombreCap}`;
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  let nombre = sessionStorage.getItem("usuarioLogueado") || "";
+
+  if (!nombre) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  const nombreCap =
+    nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
+  const saludo = document.getElementById("saludoUsuario");
+
+  if (saludo) {
+    saludo.textContent = `👋 Bienvenido/a ${nombreCap}`;
+  }
+
+  const btnLogout = document.getElementById("btnLogout");
+  if (btnLogout) {
+    btnLogout.addEventListener("click", () => {
+      sessionStorage.removeItem("usuarioLogueado");
+      window.location.href = "index.html";
+    });
+  }
+});

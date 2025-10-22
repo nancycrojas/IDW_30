@@ -106,15 +106,36 @@ altaMedicoForm?.addEventListener("submit", async (e) => {
   modalInstance.hide();
 });
 
+let indexAEliminar = null;
+const confirmModalEl = document.getElementById("confirmDeleteModal");
+const confirmModal = confirmModalEl
+  ? new bootstrap.Modal(confirmModalEl)
+  : null;
+const confirmNombreEl = document.getElementById("confirmDeleteNombre");
+const btnConfirmDelete = document.getElementById("btnConfirmDelete");
+
 tbody?.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-action='eliminar']");
   if (!btn) return;
+
   const idx = Number(btn.dataset.index);
-  if (Number.isInteger(idx)) {
-    medicosGuardados.splice(idx, 1);
-    guardarMedicos(medicosGuardados);
-    renderTabla(medicosGuardados);
+  if (!Number.isInteger(idx)) return;
+
+  indexAEliminar = idx;
+  const m = medicosGuardados[idx];
+  if (confirmNombreEl) {
+    confirmNombreEl.textContent = `${m.apellido}, ${m.nombre}`;
   }
+  confirmModal?.show();
+});
+
+btnConfirmDelete?.addEventListener("click", () => {
+  if (indexAEliminar == null) return;
+  medicosGuardados.splice(indexAEliminar, 1);
+  guardarMedicos(medicosGuardados);
+  renderTabla(medicosGuardados);
+  indexAEliminar = null;
+  confirmModal?.hide();
 });
 
 document.addEventListener("DOMContentLoaded", () => {

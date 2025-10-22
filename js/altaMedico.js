@@ -1,84 +1,134 @@
-const formAltaMedico = document.getElementById("altaMedicoForm");
-const inputApellido = document.getElementById("apellido");
-const inputNombre = document.getElementById("nombre");
-const inputMatricula = document.getElementById("matricula");
-const inputEspecialidad = document.getElementById("especialidad");
-const inputDescripcion = document.getElementById("descripcion");
-const inputTelefono = document.getElementById("telefono");
-const inputObraSocial = document.getElementById("obraSocial");
-const inputEmail = document.getElementById("email");
-const inputValor = document.getElementById("valorConsulta");
+const KEY = "medicos";
 
-function altaMedicos(event) {
-  event.preventDefault();
-
-  let apellido = inputApellido.value.trim();
-  let nombre = inputNombre.value.trim();
-  let matricula = inputMatricula.value.trim();
-  let especialidad = inputEspecialidad.value.trim();
-  let descripcion = inputDescripcion.value.trim();
-  let telefono = inputTelefono.value.trim();
-  let obraSocial = inputObraSocial.value.trim();
-  let email = inputEmail.value.trim();
-  let valorConsulta = inputValor.value.trim();
-
-  if (!nombre || !especialidad || !obraSocial) {
-    alert("POr favor completá los campor requeridos");
-    return;
+function cargarMedicos() {
+  const raw = localStorage.getItem(KEY);
+  if (!raw) {
+    localStorage.setItem(KEY, JSON.stringify(medicos));
+    return [...medicos];
   }
-  alert(
-    `Médico registrado: \n\n` +
-      `Apellido: ${apellido}\n` +
-      `Nombre: ${nombre}\n` +
-      `Matricula: ${matricula}\n` +
-      `Especialidad: ${especialidad}\n` +
-      `Descripción: ${descripcion}\n` +
-      `Teléfono: ${telefono}\n` +
-      `Obra Social: ${obraSocial}\n` +
-      `Email: ${email}\n` +
-      `Valor Consulta: ${valorConsulta}`
-  );
-  formAltaMedico.reset();
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [...medicos];
+  } catch {
+    return [...medicos];
+  }
 }
 
-formAltaMedico.addEventListener("submit", altaMedicos);
+function guardarMedicos(arr) {
+  localStorage.setItem(KEY, JSON.stringify(arr));
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  let nombre = sessionStorage.getItem("usuarioLogueado") || "";
+function convertirA64(archivo) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+    reader.readAsDataURL(archivo);
+  });
+}
 
-  if (!nombre) {
-    window.location.href = "index.html";
-    return;
+const tbody = document.getElementById("tbodyMedicos");
+
+function formatearMoneda(valor) {
+  return `$ ${Number(valor).toLocaleString("es-AR")}`;
+}
+
+function renderTabla(medicos) {
+  if (!tbody) return;
+  tbody.innerHTML = medicos
+    .map((m, idx) => {
+      return `
+        <tr>
+          <td><img src="${m.imagen}" alt="${m.nombre} ${
+        m.apellido
+      }" class="rounded" width="60" height="60"></td>
+          <td>${m.apellido}</td>
+          <td>${m.nombre}</td>
+          <td>${m.matricula}</td>
+          <td>${m.especialidad}</td>
+          <td>${m.telefono}</td>
+          <td>${m.obraSocial}</td>
+          <td>${m.email}</td>
+          <td>${formatearMoneda(m.valorConsulta)}</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-outline-danger" data-action="eliminar" data-index="${idx}">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `;
+    })
+    .join("");
+}
+
+const altaMedicoForm = document.getElementById("altaMedicoForm");
+
+let medicosGuardados = cargarMedicos();
+renderTabla(medicosGuardados);
+
+altaMedicoForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const archivo = document.getElementById("imagen").files[0];
+  let imagenBase64 = "assets/default.jpeg";
+
+  if (archivo) {
+    try {
+      imagenBase64 = await convertirA64(archivo);
+    } catch (error) {
+      console.error("Error al convertir la imagen:", error);
+    }
   }
 
-  const nombreCap =
-    nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
+  const nuevo = {
+    id: Date.now(),
+    apellido: document.getElementById("apellido").value.trim(),
+    nombre: document.getElementById("nombre").value.trim(),
+    matricula: document.getElementById("matricula").value.trim(),
+    especialidad: document.getElementById("especialidad").value.trim(),
+    descripcion: document.getElementById("descripcion").value.trim(),
+    telefono: document.getElementById("telefono").value.trim(),
+    obraSocial: document.getElementById("obraSocial").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    valorConsulta: Number(document.getElementById("valorConsulta").value),
+    imagen: imagenBase64,
+  };
 
-  const saludo = document.getElementById("saludoUsuario");
-  if (saludo) {
-    saludo.textContent = `👋 Bienvenido/a ${nombreCap}`;
+  medicosGuardados.push(nuevo);
+  guardarMedicos(medicosGuardados);
+  renderTabla(medicosGuardados);
+
+  altaMedicoForm.reset();
+
+  const modalEl = document.getElementById("modalMedico");
+  const modalInstance =
+    bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+  modalInstance.hide();
+});
+
+tbody?.addEventListener("click", (e) => {
+  const btn = e.target.closest("button[data-action='eliminar']");
+  if (!btn) return;
+  const idx = Number(btn.dataset.index);
+  if (Number.isInteger(idx)) {
+    medicosGuardados.splice(idx, 1);
+    guardarMedicos(medicosGuardados);
+    renderTabla(medicosGuardados);
   }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  let nombre = sessionStorage.getItem("usuarioLogueado") || "";
+  const nombre = sessionStorage.getItem("usuarioLogueado");
+  const saludo = document.getElementById("saludoUsuario");
+  const btnLogout = document.getElementById("btnLogout");
 
   if (!nombre) {
     window.location.href = "index.html";
-    return;
-  }
-
-  const nombreCap =
-    nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
-  const saludo = document.getElementById("saludoUsuario");
-
-  if (saludo) {
-    saludo.textContent = `👋 Bienvenido/a ${nombreCap}`;
-  }
-
-  const btnLogout = document.getElementById("btnLogout");
-  if (btnLogout) {
-    btnLogout.addEventListener("click", () => {
+  } else {
+    const nombreCap =
+      nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
+    if (saludo) saludo.textContent = `👋 Bienvenido/a ${nombreCap}`;
+    btnLogout?.addEventListener("click", () => {
       sessionStorage.removeItem("usuarioLogueado");
       window.location.href = "index.html";
     });

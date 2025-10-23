@@ -36,7 +36,7 @@
     return `
       <div class="col-12 col-sm-6 col-lg-4">
         <div class="card h-100">
-          <img class="card-img-top" src="${img}" alt="${nombreCompleto}" />
+          <img class="card-img-top" src="${img}" alt="${nombreCompleto}" style="height: 220px"/>
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${nombreCompleto}</h5>
             <p class="card-text"><strong>Especialidad: </strong>${especialidad}</p>

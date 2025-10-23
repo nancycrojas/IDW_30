@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     const nombreCap =
       nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
-    if (saludo) saludo.textContent = `👋 Bienvenido/a ${nombreCap}`;
+    if (saludo) saludo.textContent = `👋 ${nombreCap}`;
     btnLogout?.addEventListener("click", () => {
       sessionStorage.removeItem("usuarioLogueado");
       window.location.href = "index.html";

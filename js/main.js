@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
       usuarioLogueado.charAt(0).toUpperCase() +
       usuarioLogueado.slice(1).toLowerCase();
 
-    linkLogin.textContent = `👋 Bienvenido/a ${nombreCap}`;
+    linkLogin.textContent = `👋 ${nombreCap}`;
     linkLogin.removeAttribute("href");
 
     btnLogout.classList.remove("d-none");

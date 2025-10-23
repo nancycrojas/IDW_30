@@ -43,8 +43,5 @@ formLogin.addEventListener("submit", function (event) {
   } else {
     mostrarMensaje("Error en credenciales", "danger");
 
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 2000);
   }
 });

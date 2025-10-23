@@ -1,4 +1,15 @@
 const KEY = "medicos";
+let editIndex = null;
+
+document
+  .querySelector('[data-bs-target="#modalMedico"]')
+  ?.addEventListener("click", () => {
+    editIndex = null;
+    altaMedicoForm.reset();
+    document.getElementById("modalMedicoLabel").textContent = "Alta de Médico";
+    const btnSubmit = altaMedicoForm.querySelector("button[type='submit']");
+    if (btnSubmit) btnSubmit.textContent = "Guardar médico";
+  });
 
 function cargarMedicos() {
   const raw = localStorage.getItem(KEY);
@@ -51,9 +62,14 @@ function renderTabla(medicos) {
           <td>${m.email}</td>
           <td>${formatearMoneda(m.valorConsulta)}</td>
           <td class="text-center">
-            <button class="btn btn-sm btn-outline-danger" data-action="eliminar" data-index="${idx}">
-              <i class="bi bi-trash"></i>
-            </button>
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-outline-primary" data-action="editar" data-index="${idx}">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-outline-danger" data-action="eliminar" data-index="${idx}">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
           </td>
         </tr>
       `;
@@ -70,18 +86,20 @@ altaMedicoForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const archivo = document.getElementById("imagen").files[0];
-  let imagenBase64 = "assets/default.jpeg";
+  let imagenFinal =
+    editIndex !== null
+      ? medicosGuardados[editIndex].imagen
+      : "assets/default.jpeg";
 
   if (archivo) {
     try {
-      imagenBase64 = await convertirA64(archivo);
+      imagenFinal = await convertirA64(archivo);
     } catch (error) {
       console.error("Error al convertir la imagen:", error);
     }
   }
 
-  const nuevo = {
-    id: Date.now(),
+  const payload = {
     apellido: document.getElementById("apellido").value.trim(),
     nombre: document.getElementById("nombre").value.trim(),
     matricula: document.getElementById("matricula").value.trim(),
@@ -91,19 +109,29 @@ altaMedicoForm?.addEventListener("submit", async (e) => {
     obraSocial: document.getElementById("obraSocial").value.trim(),
     email: document.getElementById("email").value.trim(),
     valorConsulta: Number(document.getElementById("valorConsulta").value),
-    imagen: imagenBase64,
+    imagen: imagenFinal,
   };
 
-  medicosGuardados.push(nuevo);
+  if (editIndex === null) {
+    medicosGuardados.push({ id: Date.now(), ...payload });
+  } else {
+    medicosGuardados[editIndex] = {
+      ...medicosGuardados[editIndex],
+      ...payload,
+    };
+  }
+
   guardarMedicos(medicosGuardados);
   renderTabla(medicosGuardados);
 
   altaMedicoForm.reset();
-
   const modalEl = document.getElementById("modalMedico");
-  const modalInstance =
-    bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-  modalInstance.hide();
+  (bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl)).hide();
+
+  editIndex = null;
+  document.getElementById("modalMedicoLabel").textContent = "Alta de Médico";
+  const btnSubmit = altaMedicoForm.querySelector("button[type='submit']");
+  if (btnSubmit) btnSubmit.textContent = "Guardar médico";
 });
 
 let indexAEliminar = null;
@@ -115,18 +143,58 @@ const confirmNombreEl = document.getElementById("confirmDeleteNombre");
 const btnConfirmDelete = document.getElementById("btnConfirmDelete");
 
 tbody?.addEventListener("click", (e) => {
-  const btn = e.target.closest("button[data-action='eliminar']");
+  const btn = e.target.closest("button[data-action]");
   if (!btn) return;
 
-  const idx = Number(btn.dataset.index);
+  const action = btn.getAttribute("data-action");
+  const idx = Number(btn.getAttribute("data-index"));
   if (!Number.isInteger(idx)) return;
 
-  indexAEliminar = idx;
-  const m = medicosGuardados[idx];
-  if (confirmNombreEl) {
-    confirmNombreEl.textContent = `${m.apellido}, ${m.nombre}`;
+  if (action === "eliminar") {
+    indexAEliminar = idx;
+    const m = medicosGuardados[idx];
+    if (confirmNombreEl) {
+      confirmNombreEl.textContent = `${m.apellido}, ${m.nombre}`;
+    }
+
+    if (confirmModal) {
+      confirmModal.show();
+    } else {
+      const ok = window.confirm(
+        `¿Eliminar al Dr./Dra. ${m.apellido}, ${m.nombre}?`
+      );
+      if (ok) {
+        medicosGuardados.splice(idx, 1);
+        guardarMedicos(medicosGuardados);
+        renderTabla(medicosGuardados);
+      }
+    }
+    return;
   }
-  confirmModal?.show();
+
+  if (action === "editar") {
+    editIndex = idx;
+    const m = medicosGuardados[idx];
+
+    document.getElementById("apellido").value = m.apellido || "";
+    document.getElementById("nombre").value = m.nombre || "";
+    document.getElementById("matricula").value = m.matricula || "";
+    document.getElementById("especialidad").value = m.especialidad || "";
+    document.getElementById("descripcion").value = m.descripcion || "";
+    document.getElementById("telefono").value = m.telefono || "";
+    document.getElementById("obraSocial").value = m.obraSocial || "";
+    document.getElementById("email").value = m.email || "";
+    document.getElementById("valorConsulta").value = m.valorConsulta || "";
+
+    document.getElementById("modalMedicoLabel").textContent = "Editar Médico";
+    const btnSubmit = altaMedicoForm.querySelector("button[type='submit']");
+    if (btnSubmit) btnSubmit.textContent = "Guardar cambios";
+
+    const modalEl = document.getElementById("modalMedico");
+    (
+      bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl)
+    ).show();
+  }
 });
 
 btnConfirmDelete?.addEventListener("click", () => {

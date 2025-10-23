@@ -29,6 +29,7 @@ btn.addEventListener("click", (e) => {
 document.addEventListener("DOMContentLoaded", () => {
   const linkLogin = document.getElementById("linkLogin");
   const btnLogout = document.getElementById("btnLogout");
+  const itemAltaMedico = document.getElementById("itemAltaMedico");
 
   const usuarioLogueado = sessionStorage.getItem("usuarioLogueado");
 
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     linkLogin.removeAttribute("href");
 
     btnLogout.classList.remove("d-none");
+    itemAltaMedico?.classList.remove("d-none");
 
     btnLogout.addEventListener("click", () => {
       sessionStorage.removeItem("usuarioLogueado");

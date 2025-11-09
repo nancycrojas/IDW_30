@@ -38,7 +38,7 @@ function convertirA64(archivo) {
   });
 }
 
-const tbody = document.getElementById("tbodyMedicos");
+const tbody = document.querySelector("#tablaMedicos tbody");
 
 function formatearMoneda(valor) {
   return `$ ${Number(valor).toLocaleString("es-AR")}`;

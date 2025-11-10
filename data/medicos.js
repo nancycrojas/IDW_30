@@ -1,4 +1,4 @@
-const medicos = [
+window.medicos = [
   {
     id: "1",
     apellido: "Blanco",

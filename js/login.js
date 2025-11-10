@@ -1,3 +1,5 @@
+import { login } from "./auth.js";
+
 const formLogin = document.getElementById("formLogin");
 const usuario = document.getElementById("usuario");
 const clave = document.getElementById("clave");
@@ -19,29 +21,27 @@ function mostrarMensaje(texto, tipo, mostrarSpinner = false) {
   `;
 }
 
-formLogin.addEventListener("submit", function (event) {
+formLogin.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const usuarioInput = usuario.value.trim();
   const claveInput = clave.value.trim();
 
-  const isUsuario = usuarios.find(
-    (u) => u.usuario === usuarioInput && u.clave === claveInput
-  );
+  const isUsuario = await login(usuarioInput, claveInput);
 
   if (isUsuario) {
-    const usuarioCapitalizado =
-      usuarioInput.charAt(0).toUpperCase() +
-      usuarioInput.slice(1).toLowerCase();
-
-    sessionStorage.setItem("usuarioLogueado", usuarioCapitalizado);
-    mostrarMensaje(`Bienvenida/o ${usuarioCapitalizado}`, "success", true);
+    sessionStorage.setItem("usuarioLogueado", isUsuario.username);
+    sessionStorage.setItem("token", isUsuario.accessToken);
+    mostrarMensaje(
+      `Bienvenida/o ${isUsuario.firstName} ${isUsuario.lastName}`,
+      "success",
+      true
+    );
 
     setTimeout(() => {
       window.location.href = "altaMedico.html";
     }, 2000);
   } else {
     mostrarMensaje("Error en credenciales", "danger");
-
   }
 });

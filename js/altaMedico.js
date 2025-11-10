@@ -205,21 +205,3 @@ btnConfirmDelete?.addEventListener("click", () => {
   indexAEliminar = null;
   confirmModal?.hide();
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const nombre = sessionStorage.getItem("usuarioLogueado");
-  const saludo = document.getElementById("saludoUsuario");
-  const btnLogout = document.getElementById("btnLogout");
-
-  if (!nombre) {
-    window.location.href = "index.html";
-  } else {
-    const nombreCap =
-      nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
-    if (saludo) saludo.textContent = `👋 ${nombreCap}`;
-    btnLogout?.addEventListener("click", () => {
-      sessionStorage.removeItem("usuarioLogueado");
-      window.location.href = "index.html";
-    });
-  }
-});

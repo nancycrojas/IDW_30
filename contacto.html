@@ -70,6 +70,9 @@
                   >Iniciar sesión</a
                 >
               </li>
+              <li class="nav-item d-none" id="itemPanel">
+                <a class="nav-link" href="panel.html">Panel Admin</a>
+              </li>
               <li class="nav-item">
                 <button id="btnLogout" class="btn btn-sm d-none mb-2">
                   Cerrar sesión
@@ -141,7 +144,9 @@
                 id="mensajeExito"
               >
                 <strong>¡TURNO SOLICITADO CON ÉXITO!</strong>
-                <p class="mb-0 mt-2">En breve nos comunicaremos para confirmar su turno.</p>
+                <p class="mb-0 mt-2">
+                  En breve nos comunicaremos para confirmar su turno.
+                </p>
                 <button
                   type="button"
                   class="btn-close"
@@ -154,10 +159,12 @@
                 <h5 class="text-primary mb-3">
                   <i class="bi bi-person-fill"></i> Datos del Paciente
                 </h5>
-                
+
                 <div class="row">
                   <div class="col-md-6 mb-3">
-                    <label for="nombre" class="form-label">Nombre Completo</label>
+                    <label for="nombre" class="form-label"
+                      >Nombre Completo</label
+                    >
                     <input
                       type="text"
                       class="form-control"
@@ -182,7 +189,9 @@
 
                 <div class="row">
                   <div class="col-md-6 mb-3">
-                    <label for="telefono" class="form-label">Número de Teléfono</label>
+                    <label for="telefono" class="form-label"
+                      >Número de Teléfono</label
+                    >
                     <div class="input-group">
                       <span class="input-group-text"
                         ><i class="bi bi-phone"></i> +54</span
@@ -199,7 +208,9 @@
                   </div>
 
                   <div class="col-md-6 mb-3">
-                    <label for="email" class="form-label">Correo electrónico</label>
+                    <label for="email" class="form-label"
+                      >Correo electrónico</label
+                    >
                     <input
                       type="email"
                       class="form-control"
@@ -213,7 +224,9 @@
 
                 <div class="row">
                   <div class="col-md-6 mb-3">
-                    <label for="obraSocial" class="form-label">Obra Social / Prepaga</label>
+                    <label for="obraSocial" class="form-label"
+                      >Obra Social / Prepaga</label
+                    >
                     <select
                       class="form-select"
                       id="obraSocial"
@@ -232,7 +245,7 @@
                   </div>
                 </div>
 
-                <hr class="my-4">
+                <hr class="my-4" />
 
                 <h5 class="text-primary mb-3">
                   <i class="bi bi-hospital"></i> Datos del Turno
@@ -241,13 +254,20 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="medico" class="form-label">Médico</label>
-                    <select class="form-select" id="medico" name="medico" required>
+                    <select
+                      class="form-select"
+                      id="medico"
+                      name="medico"
+                      required
+                    >
                       <option value="">Seleccione un médico</option>
                     </select>
                   </div>
 
                   <div class="col-md-6 mb-3">
-                    <label for="especialidad" class="form-label">Especialidad</label>
+                    <label for="especialidad" class="form-label"
+                      >Especialidad</label
+                    >
                     <input
                       type="text"
                       class="form-control"
@@ -261,7 +281,9 @@
 
                 <div class="row">
                   <div class="col-md-6 mb-3">
-                    <label for="fecha" class="form-label">Fecha preferida</label>
+                    <label for="fecha" class="form-label"
+                      >Fecha preferida</label
+                    >
                     <input
                       type="date"
                       class="form-control"
@@ -290,7 +312,9 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="motivo" class="form-label">Motivo de la consulta</label>
+                  <label for="motivo" class="form-label"
+                    >Motivo de la consulta</label
+                  >
                   <textarea
                     class="form-control"
                     id="motivo"
@@ -366,6 +390,7 @@
 
     <script src="data/medicos.js"></script>
     <script src="js/contacto.js"></script>
+    <script src="js/theme.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

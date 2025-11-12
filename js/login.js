@@ -39,7 +39,7 @@ formLogin.addEventListener("submit", async function (event) {
     );
 
     setTimeout(() => {
-      window.location.href = "altaMedico.html";
+      window.location.href = "panel.html";
     }, 2000);
   } else {
     mostrarMensaje("Error en credenciales", "danger");

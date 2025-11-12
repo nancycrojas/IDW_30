@@ -66,7 +66,6 @@
     }
 
     cont.innerHTML = medicos.map(cardMedico).join("");
-    console.log("Tarjetas de médicos renderizadas correctamente");
   }
 
   document.addEventListener("DOMContentLoaded", render);

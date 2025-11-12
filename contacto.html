@@ -16,7 +16,7 @@
     />
 
     <link rel="stylesheet" href="css/styles.css" />
-    <title>Contacto - Centro Médico San Benjamin</title>
+    <title>Solicitar Turno - Centro Médico San Benjamin</title>
   </head>
   <body>
     <header class="p-4">
@@ -115,10 +115,9 @@
           </div>
 
           <div class="col-lg-8 col-md-12">
-            <!-- <section class="contacto p-4 shadow bg-white rounded"> -->
             <section class="contacto p-4 shadow rounded">
               <h2 class="text-center text-primary mb-4">
-                Contáctanos para tu Consulta
+                <i class="bi bi-calendar-heart"></i> Solicitar Turno Médico
               </h2>
 
               <div
@@ -141,7 +140,8 @@
                 role="alert"
                 id="mensajeExito"
               >
-                <strong>¡TURNO AGENDADO!</strong>
+                <strong>¡TURNO SOLICITADO CON ÉXITO!</strong>
+                <p class="mb-0 mt-2">En breve nos comunicaremos para confirmar su turno.</p>
                 <button
                   type="button"
                   class="btn-close"
@@ -150,37 +150,39 @@
                 ></button>
               </div>
 
-              <form id="formularioContacto">
+              <form id="formularioTurno">
+                <h5 class="text-primary mb-3">
+                  <i class="bi bi-person-fill"></i> Datos del Paciente
+                </h5>
+                
                 <div class="row">
                   <div class="col-md-6 mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
+                    <label for="nombre" class="form-label">Nombre Completo</label>
                     <input
                       type="text"
                       class="form-control"
                       id="nombre"
                       name="nombre"
                       required
+                      placeholder="Ej: Juan Pérez"
                     />
                   </div>
                   <div class="col-md-6 mb-3">
-                    <label for="email" class="form-label"
-                      >Correo electrónico</label
-                    >
+                    <label for="dni" class="form-label">DNI</label>
                     <input
-                      type="email"
+                      type="text"
                       class="form-control"
-                      id="email"
-                      name="email"
+                      id="dni"
+                      name="dni"
                       required
+                      placeholder="Ej: 35123456"
                     />
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-md-6 mb-3">
-                    <label for="telefono" class="form-label"
-                      >Número de Teléfono</label
-                    >
+                    <label for="telefono" class="form-label">Número de Teléfono</label>
                     <div class="input-group">
                       <span class="input-group-text"
                         ><i class="bi bi-phone"></i> +54</span
@@ -197,9 +199,21 @@
                   </div>
 
                   <div class="col-md-6 mb-3">
-                    <label for="obraSocial" class="form-label"
-                      >Obra Social / Prepaga</label
-                    >
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      required
+                      placeholder="Ej: juan@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="obraSocial" class="form-label">Obra Social / Prepaga</label>
                     <select
                       class="form-select"
                       id="obraSocial"
@@ -218,23 +232,81 @@
                   </div>
                 </div>
 
+                <hr class="my-4">
+
+                <h5 class="text-primary mb-3">
+                  <i class="bi bi-hospital"></i> Datos del Turno
+                </h5>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="medico" class="form-label">Médico</label>
+                    <select class="form-select" id="medico" name="medico" required>
+                      <option value="">Seleccione un médico</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="especialidad" class="form-label">Especialidad</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="especialidad"
+                      name="especialidad"
+                      readonly
+                      placeholder="Se asignará automáticamente"
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="fecha" class="form-label">Fecha preferida</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="fecha"
+                      name="fecha"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="hora" class="form-label">Hora preferida</label>
+                    <select class="form-select" id="hora" name="hora" required>
+                      <option value="">Seleccione un horario</option>
+                      <option value="08:00">08:00 hs</option>
+                      <option value="09:00">09:00 hs</option>
+                      <option value="10:00">10:00 hs</option>
+                      <option value="11:00">11:00 hs</option>
+                      <option value="12:00">12:00 hs</option>
+                      <option value="14:00">14:00 hs</option>
+                      <option value="15:00">15:00 hs</option>
+                      <option value="16:00">16:00 hs</option>
+                      <option value="17:00">17:00 hs</option>
+                      <option value="18:00">18:00 hs</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="mb-3">
-                  <label for="mensaje" class="form-label">Mensaje</label>
+                  <label for="motivo" class="form-label">Motivo de la consulta</label>
                   <textarea
                     class="form-control"
-                    id="mensaje"
-                    name="mensaje"
-                    rows="5"
-                    required
+                    id="motivo"
+                    name="motivo"
+                    rows="3"
+                    placeholder="Describa brevemente el motivo de su consulta"
                   ></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">
-                  Enviar Mensaje
+                  <i class="bi bi-calendar-check"></i> Solicitar Turno
                 </button>
               </form>
             </section>
           </div>
+
           <div class="col-lg-2 d-none d-lg-block">
             <div
               id="carouselRight"
@@ -292,36 +364,8 @@
       crossorigin="anonymous"
     ></script>
 
-    <script>
-      const formulario = document.getElementById("formularioContacto");
-      const alertaExito = document.getElementById("mensajeExito");
-      const alertaError = document.getElementById("mensajeError");
-
-      formulario.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        // Ocultar alertas anteriores
-        alertaExito.classList.add("d-none");
-        alertaError.classList.add("d-none");
-
-        // VALIDACIÓN: Si no es válido (faltan campos required)
-        if (!formulario.checkValidity()) {
-          alertaError.classList.remove("d-none");
-          formulario.classList.add("was-validated"); // Muestra feedback visual de Bootstrap
-          return;
-        }
-
-        // Si es válido (éxito)
-        alertaExito.classList.remove("d-none");
-        formulario.reset();
-        formulario.classList.remove("was-validated");
-
-        setTimeout(() => {
-          alertaExito.classList.add("d-none");
-        }, 5000);
-      });
-    </script>
-    <script src="js/theme.js"></script>
+    <script src="data/medicos.js"></script>
+    <script src="js/contacto.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

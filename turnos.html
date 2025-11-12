@@ -58,7 +58,13 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto header-nav">
               <li class="nav-item">
-                <a class="nav-link" href="usuarios.html">Usuarios</a>
+                <a class="nav-link" href="contacto.html">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="institucional.html">Institucional</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="altaMedico.html">Administrar Médicos</a>
               </li>
               <li class="nav-item">
                 <a id="saludoUsuario" class="nav-link"></a>
@@ -66,6 +72,11 @@
               <li class="nav-item ms-lg-2">
                 <button id="btnLogout" class="btn btn-sm mb-2">
                   Cerrar sesión
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="btnTheme" class="btn btn-outline-dark ms-lg-4">
+                  ⚫️
                 </button>
               </li>
             </ul>
@@ -76,34 +87,33 @@
     <main class="container">
       <section class="mb-5">
         <div class="d-flex align-items-center justify-content-between mb-3">
-          <h2 class="mb-0">Médicos</h2>
+          <h2 class="mb-0">Turnos</h2>
           <button
             class="btn btn-success"
             data-bs-toggle="modal"
-            data-bs-target="#modalMedico"
+            data-bs-target="#modalTurno"
           >
-            <i class="bi bi-person-plus"></i> Agregar médico
+            <i class="bi bi-calendar-plus"></i> Agregar turno
           </button>
         </div>
 
         <!-- Tabla -->
         <div class="table-responsive">
-          <table class="table table-striped align-middle" id="tablaMedicos">
+          <table class="table table-striped align-middle" id="tablaTurnos">
             <thead class="table-light">
               <tr>
-                <th>Foto</th>
-                <th>Apellido</th>
-                <th>Nombre</th>
-                <th>Matrícula</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Paciente</th>
+                <th>DNI</th>
+                <th>Médico</th>
                 <th>Especialidad</th>
-                <th>Teléfono</th>
                 <th>Obra Social</th>
-                <th>Email</th>
-                <th>Valor Consulta</th>
+                <th>Estado</th>
                 <th class="text-center" style="width: 110px">Acciones</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="tbodyTurnos"></tbody>
           </table>
         </div>
       </section>
@@ -111,17 +121,17 @@
       <!-- Modal-->
       <div
         class="modal fade"
-        id="modalMedico"
+        id="modalTurno"
         tabindex="-1"
-        aria-labelledby="modalMedicoLabel"
+        aria-labelledby="modalTurnoLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
           <div class="modal-content">
-            <form id="altaMedicoForm">
+            <form id="altaTurnoForm">
               <div class="modal-header">
-                <h5 class="modal-title" id="modalMedicoLabel">
-                  Alta de Médico
+                <h5 class="modal-title" id="modalTurnoLabel">
+                  Alta de Turno
                 </h5>
                 <button
                   type="button"
@@ -134,116 +144,108 @@
               <div class="modal-body">
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <label for="apellido" class="form-label">Apellido</label>
+                    <label for="pacienteNombre" class="form-label">Nombre del Paciente</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="apellido"
+                      id="pacienteNombre"
                       required
                     />
                   </div>
                   <div class="col-md-6">
-                    <label for="nombre" class="form-label">Nombre</label>
+                    <label for="pacienteDNI" class="form-label">DNI</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="nombre"
-                      required
-                    />
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="matricula" class="form-label"
-                      >Matrícula Profesional</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="matricula"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="especialidad" class="form-label"
-                      >Especialidad</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="especialidad"
+                      id="pacienteDNI"
                       required
                     />
                   </div>
 
-                  <div class="col-12">
-                    <label for="descripcion" class="form-label"
-                      >Descripción</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="descripcion"
-                      rows="2"
-                      placeholder="Opcional"
-                    ></textarea>
-                  </div>
-
                   <div class="col-md-6">
-                    <label for="telefono" class="form-label">Teléfono</label>
+                    <label for="pacienteTelefono" class="form-label">Teléfono</label>
                     <input
                       type="tel"
                       class="form-control"
-                      id="telefono"
+                      id="pacienteTelefono"
                       required
                     />
                   </div>
                   <div class="col-md-6">
-                    <label for="obraSocial" class="form-label"
-                      >Obra Social</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="obraSocial"
-                      required
-                    />
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="pacienteEmail" class="form-label">Email</label>
                     <input
                       type="email"
                       class="form-control"
-                      id="email"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="valorConsulta" class="form-label"
-                      >Valor de consulta</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="valorConsulta"
-                      min="0"
+                      id="pacienteEmail"
                       required
                     />
                   </div>
 
-                  <div class="col-12">
-                    <label for="imagen" class="form-label"
-                      >Foto del médico</label
-                    >
+                  <div class="col-md-6">
+                    <label for="turnoMedico" class="form-label">Médico</label>
+                    <select class="form-select" id="turnoMedico" required>
+                      <option value="">Seleccione un médico</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="turnoEspecialidad" class="form-label">Especialidad</label>
                     <input
-                      type="file"
-                      accept="image/*"
+                      type="text"
                       class="form-control"
-                      id="imagen"
+                      id="turnoEspecialidad"
+                      readonly
                     />
-                    <div class="form-text">
-                      Suba una foto (opcional). Si no carga ninguna, se mostrará
-                      una imagen por defecto.
-                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="turnoFecha" class="form-label">Fecha</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="turnoFecha"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="turnoHora" class="form-label">Hora</label>
+                    <input
+                      type="time"
+                      class="form-control"
+                      id="turnoHora"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="obraSocial" class="form-label">Obra Social</label>
+                    <select class="form-select" id="obraSocial" required>
+                      <option value="particular">Particular / No tengo</option>
+                      <option value="osde">OSDE</option>
+                      <option value="swiss">Swiss Medical</option>
+                      <option value="medicus">Medicus</option>
+                      <option value="galeno">Galeno</option>
+                      <option value="ioma">IOMA</option>
+                      <option value="omint">Omint</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="estadoTurno" class="form-label">Estado</label>
+                    <select class="form-select" id="estadoTurno" required>
+                      <option value="pendiente">Pendiente</option>
+                      <option value="confirmado">Confirmado</option>
+                      <option value="cancelado">Cancelado</option>
+                      <option value="completado">Completado</option>
+                    </select>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="motivoConsulta" class="form-label">Motivo de la consulta</label>
+                    <textarea
+                      class="form-control"
+                      id="motivoConsulta"
+                      rows="2"
+                      placeholder="Opcional"
+                    ></textarea>
                   </div>
                 </div>
               </div>
@@ -257,7 +259,7 @@
                   Cancelar
                 </button>
                 <button type="submit" class="btn btn-primary">
-                  Guardar médico
+                  Guardar turno
                 </button>
               </div>
             </form>
@@ -314,7 +316,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            ¿Seguro que desea eliminar a
+            ¿Seguro que desea eliminar el turno de
             <strong id="confirmDeleteNombre"></strong>?
           </div>
           <div class="modal-footer">
@@ -328,8 +330,10 @@
         </div>
       </div>
     </div>
-    <!-- <script src="js/main.js"></script> -->
+
     <script src="data/medicos.js"></script>
-    <script src="js/altaMedico.js"></script>
+    <script src="data/turnos.js"></script>
+    <script src="js/turnos.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

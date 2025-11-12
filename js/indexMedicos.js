@@ -29,21 +29,20 @@
     const nombreCompleto = `${safe(m.nombre)} ${safe(m.apellido)}`;
     const especialidad = safe(m.especialidad, "Especialidad");
     const obra = safe(m.obraSocial, "—");
-    const turnosHref = "contacto.html";
     const dh = safe(m.diasHorarios, "A coordinar");
     const valor = moneda(m.valorConsulta);
 
     return `
       <div class="col-12 col-sm-6 col-lg-4">
         <div class="card h-100">
-          <img class="card-img-top" src="${img}" alt="${nombreCompleto}" style="height: 220px"/>
+          <img class="card-img-top" src="${img}" alt="${nombreCompleto}" />
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${nombreCompleto}</h5>
             <p class="card-text"><strong>Especialidad: </strong>${especialidad}</p>
             <p class="card-text"><strong>Días y horarios: </strong>${dh}</p>
             <p class="card-text"><strong>Obra Social: </strong>${obra}</p>
             <p class="card-text"><strong>Valor: </strong>${valor}</p>
-            <a href="${turnosHref}" class="btn btn-primary mt-auto w-100">Pedir turno</a>
+            <a href="contacto.html" class="btn btn-primary mt-auto w-100">Pedir turno</a>
           </div>
         </div>
       </div>
@@ -52,7 +51,10 @@
 
   function render() {
     const cont = document.getElementById(CONT_ID);
-    if (!cont) return;
+    if (!cont) {
+      console.error("No se encontró el contenedor con id:", CONT_ID);
+      return;
+    }
 
     const medicos = cargarMedicos();
     if (!medicos.length) {
@@ -64,6 +66,7 @@
     }
 
     cont.innerHTML = medicos.map(cardMedico).join("");
+    console.log("Tarjetas de médicos renderizadas correctamente");
   }
 
   document.addEventListener("DOMContentLoaded", render);

@@ -26,13 +26,11 @@ function cargarObrasSocialesEnTurnos() {
   const selectObraSocial = document.getElementById("obraSocial");
   if (!selectObraSocial) return;
 
-  // Limpiamos opciones anteriores, excepto las dos primeras ("Seleccione..." y "Particular")
   while (selectObraSocial.options.length > 2) {
     selectObraSocial.remove(2);
   }
 
-  const obrasSociales =
-    JSON.parse(localStorage.getItem("obrasSociales")) || [];
+  const obrasSociales = JSON.parse(localStorage.getItem("obrasSociales")) || [];
 
   const obrasSocialesActivas = obrasSociales.filter(
     (os) => os.estado === "Activa"
@@ -40,7 +38,6 @@ function cargarObrasSocialesEnTurnos() {
 
   obrasSocialesActivas.forEach((os) => {
     const option = document.createElement("option");
-    // El valor guardado será el nombre, el texto mostrará nombre y plan.
     option.value = os.nombre;
     option.textContent = `${os.nombre} - ${os.plan}`;
     selectObraSocial.appendChild(option);
@@ -86,12 +83,12 @@ function getNombreObraSocial(codigo) {
     return "Particular / No tengo";
   }
 
-  const obrasSociales =
-    JSON.parse(localStorage.getItem("obrasSociales")) || [];
+  const obrasSociales = JSON.parse(localStorage.getItem("obrasSociales")) || [];
   const osEncontrada = obrasSociales.find((os) => os.nombre === codigo);
 
-  // Si se encuentra, devuelve "Nombre - Plan". Si no, solo el código.
-  return osEncontrada ? `${osEncontrada.nombre} - ${osEncontrada.plan}` : codigo;
+  return osEncontrada
+    ? `${osEncontrada.nombre} - ${osEncontrada.plan}`
+    : codigo;
 }
 
 function getBadgeEstado(estado) {

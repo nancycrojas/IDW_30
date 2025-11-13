@@ -60,12 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
           }">${os.estado}</span>
         </td>
         <td class="text-center">
-          <button class="btn btn-sm btn-warning btn-edit" data-index="${index}" title="Editar">
-            <i class="bi bi-pencil-square"></i>
-          </button>
-          <button class="btn btn-sm btn-danger btn-delete" data-index="${index}" title="Eliminar">
-            <i class="bi bi-trash"></i>
-          </button>
+          <div class="btn-group btn-group-sm" role="group">
+            <button class="btn btn-sm btn-warning btn-edit" data-index="${index}" title="Editar">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="btn btn-sm btn-danger btn-delete" data-index="${index}" title="Eliminar">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
         </td>
       `;
       tablaBody.appendChild(tr);

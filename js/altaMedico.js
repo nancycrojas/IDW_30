@@ -50,6 +50,36 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarEspecialidadesEnSelect();
 });
 
+function cargarObrasSocialesEnSelect() {
+  const selectObraSocial = document.getElementById("obraSocial");
+  if (!selectObraSocial) return;
+
+  const raw = localStorage.getItem("obrasSociales");
+  if (!raw) return;
+
+  try {
+    const obrasSociales = JSON.parse(raw);
+    if (Array.isArray(obrasSociales) && obrasSociales.length > 0) {
+      const activas = obrasSociales.filter((os) => os.estado === "Activa");
+
+      selectObraSocial.innerHTML =
+        '<option value="">Seleccione una obra social</option>' +
+        activas
+          .map(
+            (os) =>
+              `<option value="${os.nombre}">${os.nombre} (${os.plan})</option>`
+          )
+          .join("");
+    }
+  } catch (error) {
+    console.error("Error al cargar obras sociales:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  cargarObrasSocialesEnSelect();
+});
+
 function guardarMedicos(arr) {
   localStorage.setItem(KEY, JSON.stringify(arr));
 }

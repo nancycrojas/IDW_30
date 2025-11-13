@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   let editIndex = null;
 
-  // 🩺 Cargar o inicializar especialidades
   function cargarEspecialidades() {
     const raw = localStorage.getItem(KEY_ESPECIALIDADES);
     if (!raw) {

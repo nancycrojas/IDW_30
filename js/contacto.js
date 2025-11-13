@@ -1,5 +1,6 @@
 const KEY_TURNOS = "turnos";
 const KEY_MEDICOS = "medicos";
+const KEY_OBRAS_SOCIALES = "obrasSociales";
 
 function cargarMedicos() {
   const raw = localStorage.getItem(KEY_MEDICOS);
@@ -21,6 +22,31 @@ function cargarTurnos() {
   } catch {
     return [];
   }
+}
+
+function cargarObrasSociales() {
+  const select = document.getElementById("obraSocial");
+  if (!select) return;
+
+  const obrasSociales =
+    JSON.parse(localStorage.getItem(KEY_OBRAS_SOCIALES)) || [];
+
+  if (obrasSociales.length === 0) {
+    select.innerHTML = `
+      <option value="particular" selected>Particular / No tengo</option>
+    `;
+    return;
+  }
+
+  select.innerHTML =
+    '<option value="particular" selected>Particular / No tengo</option>' +
+    obrasSociales
+      .filter((os) => os.estado === "Activa")
+      .map(
+        (os) =>
+          `<option value="${os.nombre}">${os.nombre} - ${os.plan}</option>`
+      )
+      .join("");
 }
 
 function guardarTurno(turno) {
@@ -123,4 +149,5 @@ formulario?.addEventListener("submit", function (event) {
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarOpcionesMedicos();
+  cargarObrasSociales();
 });

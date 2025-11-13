@@ -15,6 +15,38 @@ document
     document.getElementById("turnoFecha").setAttribute("min", hoy);
   });
 
+const modalTurnoEl = document.getElementById("modalTurno");
+if (modalTurnoEl) {
+  modalTurnoEl.addEventListener("show.bs.modal", () => {
+    cargarObrasSocialesEnTurnos();
+  });
+}
+
+function cargarObrasSocialesEnTurnos() {
+  const selectObraSocial = document.getElementById("obraSocial");
+  if (!selectObraSocial) return;
+
+  // Limpiamos opciones anteriores, excepto las dos primeras ("Seleccione..." y "Particular")
+  while (selectObraSocial.options.length > 2) {
+    selectObraSocial.remove(2);
+  }
+
+  const obrasSociales =
+    JSON.parse(localStorage.getItem("obrasSociales")) || [];
+
+  const obrasSocialesActivas = obrasSociales.filter(
+    (os) => os.estado === "Activa"
+  );
+
+  obrasSocialesActivas.forEach((os) => {
+    const option = document.createElement("option");
+    // El valor guardado será el nombre, el texto mostrará nombre y plan.
+    option.value = os.nombre;
+    option.textContent = `${os.nombre} - ${os.plan}`;
+    selectObraSocial.appendChild(option);
+  });
+}
+
 function cargarTurnos() {
   const raw = localStorage.getItem(KEY_TURNOS);
   if (!raw) {
@@ -50,16 +82,16 @@ function formatearFecha(fecha) {
 }
 
 function getNombreObraSocial(codigo) {
-  const obras = {
-    particular: "Particular",
-    osde: "OSDE",
-    swiss: "Swiss Medical",
-    medicus: "Medicus",
-    galeno: "Galeno",
-    ioma: "IOMA",
-    omint: "Omint",
-  };
-  return obras[codigo] || codigo;
+  if (codigo === "particular") {
+    return "Particular / No tengo";
+  }
+
+  const obrasSociales =
+    JSON.parse(localStorage.getItem("obrasSociales")) || [];
+  const osEncontrada = obrasSociales.find((os) => os.nombre === codigo);
+
+  // Si se encuentra, devuelve "Nombre - Plan". Si no, solo el código.
+  return osEncontrada ? `${osEncontrada.nombre} - ${osEncontrada.plan}` : codigo;
 }
 
 function getBadgeEstado(estado) {

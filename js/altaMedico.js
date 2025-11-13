@@ -25,6 +25,31 @@ function cargarMedicos() {
   }
 }
 
+function cargarEspecialidadesEnSelect() {
+  const selectEspecialidad = document.getElementById("especialidad");
+  if (!selectEspecialidad) return;
+
+  const raw = localStorage.getItem("especialidades");
+  if (!raw) return;
+
+  try {
+    const especialidades = JSON.parse(raw);
+    if (Array.isArray(especialidades) && especialidades.length > 0) {
+      selectEspecialidad.innerHTML =
+        '<option value="">Seleccione una especialidad</option>' +
+        especialidades
+          .map((e) => `<option value="${e.nombre}">${e.nombre}</option>`)
+          .join("");
+    }
+  } catch (error) {
+    console.error("Error al cargar especialidades:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  cargarEspecialidadesEnSelect();
+});
+
 function guardarMedicos(arr) {
   localStorage.setItem(KEY, JSON.stringify(arr));
 }
@@ -185,7 +210,6 @@ tbody?.addEventListener("click", (e) => {
     document.getElementById("obraSocial").value = m.obraSocial || "";
     document.getElementById("email").value = m.email || "";
     document.getElementById("valorConsulta").value = m.valorConsulta || "";
-
     document.getElementById("modalMedicoLabel").textContent = "Editar Médico";
     const btnSubmit = altaMedicoForm.querySelector("button[type='submit']");
     if (btnSubmit) btnSubmit.textContent = "Guardar cambios";

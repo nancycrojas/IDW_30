@@ -14,7 +14,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
     <link rel="stylesheet" href="css/styles.css" />
-    <title>Centro Médico San Benjamin</title>
+    <title>Obras Sociales - Centro Médico San Benjamín</title>
   </head>
   <body>
     <header class="p-4">
@@ -60,6 +60,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="panel.html">Volver al panel</a>
               </li>
+              <li class="nav-item">
+                <a id="saludoUsuario" class="nav-link"></a>
+              </li>
               <li class="nav-item ms-lg-2">
                 <button id="btnLogout" class="btn btn-sm mb-2">
                   Cerrar sesión
@@ -73,48 +76,48 @@
     <main class="container">
       <section class="mb-5">
         <div class="d-flex align-items-center justify-content-between mb-3">
-          <h2 class="mb-0">Turnos</h2>
+          <h2 class="mb-0">Obras Sociales</h2>
           <button
             class="btn btn-success"
             data-bs-toggle="modal"
-            data-bs-target="#modalTurno"
+            data-bs-target="#modalObraSocial"
           >
-            <i class="bi bi-calendar-plus"></i> Agregar turno
+            <i class="bi bi-plus-circle"></i> Agregar Obra Social
           </button>
         </div>
 
         <div class="table-responsive">
-          <table class="table table-striped align-middle" id="tablaTurnos">
+          <table
+            class="table table-striped align-middle"
+            id="tablaObrasSociales"
+          >
             <thead class="table-light">
               <tr>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Paciente</th>
-                <th>DNI</th>
-                <th>Médico</th>
-                <th>Especialidad</th>
-                <th>Obra Social</th>
+                <th>Nombre</th>
+                <th>Plan</th>
                 <th>Estado</th>
                 <th class="text-center" style="width: 110px">Acciones</th>
               </tr>
             </thead>
-            <tbody id="tbodyTurnos"></tbody>
+            <tbody></tbody>
           </table>
         </div>
       </section>
 
       <div
         class="modal fade"
-        id="modalTurno"
+        id="modalObraSocial"
         tabindex="-1"
-        aria-labelledby="modalTurnoLabel"
+        aria-labelledby="modalObraSocialLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
           <div class="modal-content">
-            <form id="altaTurnoForm">
+            <form id="altaObraSocialForm">
               <div class="modal-header">
-                <h5 class="modal-title" id="modalTurnoLabel">Alta de Turno</h5>
+                <h5 class="modal-title" id="modalObraSocialLabel">
+                  Alta de Obra Social
+                </h5>
                 <button
                   type="button"
                   class="btn-close"
@@ -126,114 +129,30 @@
               <div class="modal-body">
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <label for="pacienteNombre" class="form-label"
-                      >Nombre del Paciente</label
-                    >
+                    <label for="nombre" class="form-label">Nombre</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="pacienteNombre"
+                      id="nombre"
                       required
                     />
                   </div>
                   <div class="col-md-6">
-                    <label for="pacienteDNI" class="form-label">DNI</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="pacienteDNI"
-                      required
-                    />
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="pacienteTelefono" class="form-label"
-                      >Teléfono</label
-                    >
-                    <input
-                      type="tel"
-                      class="form-control"
-                      id="pacienteTelefono"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="pacienteEmail" class="form-label">Email</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="pacienteEmail"
-                      required
-                    />
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="turnoMedico" class="form-label">Médico</label>
-                    <select class="form-select" id="turnoMedico" required>
-                      <option value="">Seleccione un médico</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="turnoEspecialidad" class="form-label"
-                      >Especialidad</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="turnoEspecialidad"
-                      readonly
-                    />
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="turnoFecha" class="form-label">Fecha</label>
-                    <input
-                      type="date"
-                      class="form-control"
-                      id="turnoFecha"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="turnoHora" class="form-label">Hora</label>
-                    <input
-                      type="time"
-                      class="form-control"
-                      id="turnoHora"
-                      required
-                    />
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="obraSocial" class="form-label"
-                      >Obra Social</label
-                    >
-                    <select class="form-select" id="obraSocial" required>
-                      <option value="">Seleccione una obra social</option>
-                      <option value="particular">Particular / No tengo</option>
-                     
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="estadoTurno" class="form-label">Estado</label>
-                    <select class="form-select" id="estadoTurno" required>
-                      <option value="pendiente">Pendiente</option>
-                      <option value="confirmado">Confirmado</option>
-                      <option value="cancelado">Cancelado</option>
-                      <option value="completado">Completado</option>
+                    <label for="plan" class="form-label">Plan</label>
+                    <select class="form-select" id="plan" required>
+                      <option value="">Seleccione un plan</option>
+                      <option value="100%">100%</option>
+                      <option value="50%">50%</option>
+                      <option value="20%">20%</option>
                     </select>
                   </div>
 
                   <div class="col-12">
-                    <label for="motivoConsulta" class="form-label"
-                      >Motivo de la consulta</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="motivoConsulta"
-                      rows="2"
-                      placeholder="Opcional"
-                    ></textarea>
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-select" id="estado" required>
+                      <option value="Activa">Activa</option>
+                      <option value="Inactiva">Inactiva</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -247,7 +166,7 @@
                   Cancelar
                 </button>
                 <button type="submit" class="btn btn-primary">
-                  Guardar turno
+                  Guardar Obra Social
                 </button>
               </div>
             </form>
@@ -304,7 +223,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            ¿Seguro que desea eliminar el turno de
+            ¿Seguro que desea eliminar la obra social
             <strong id="confirmDeleteNombre"></strong>?
           </div>
           <div class="modal-footer">
@@ -318,10 +237,8 @@
         </div>
       </div>
     </div>
-
-    <script src="data/medicos.js"></script>
-    <script src="data/turnos.js"></script>
-    <script src="js/turnos.js"></script>
     <script src="js/main.js"></script>
+   
+    <script src="js/obraSocial.js"></script>
   </body>
 </html>

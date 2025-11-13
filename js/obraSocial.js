@@ -1,3 +1,4 @@
+verificarAutenticacion();
 const KEY_OBRAS_SOCIALES = "obrasSociales";
 let editIndex = null;
 

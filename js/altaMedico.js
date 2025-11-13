@@ -1,3 +1,4 @@
+verificarAutenticacion();
 const KEY = "medicos";
 let editIndex = null;
 

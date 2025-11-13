@@ -1,3 +1,8 @@
+function verificarAutenticacion() {
+  if (!sessionStorage.getItem('usuarioLogueado')) {
+    window.location.href = 'login.html';
+  }
+}
 document.addEventListener("DOMContentLoaded", () => {
   const linkLogin = document.getElementById("linkLogin");
   const btnLogout = document.getElementById("btnLogout");
@@ -29,5 +34,5 @@ document.addEventListener("DOMContentLoaded", () => {
       sessionStorage.removeItem("usuarioLogueado");
       window.location.href = "index.html";
     });
-  }
+    }
 });

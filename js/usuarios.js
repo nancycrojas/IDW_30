@@ -1,3 +1,4 @@
+ verificarAutenticacion();
 document.addEventListener("DOMContentLoaded", async () => {
   const tablaUsuariosBody = document.querySelector("#tablaUsuarios tbody");
 
@@ -24,5 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.log("Error", error);
     throw Error("Error en la api Dummy");
+
+   
   }
 });

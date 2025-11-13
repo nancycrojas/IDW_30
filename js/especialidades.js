@@ -1,3 +1,5 @@
+verificarAutenticacion();
+
 const KEY_ESPECIALIDADES = "especialidades";
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -60,9 +60,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="panel.html">Volver al panel</a>
               </li>
-              <li class="nav-item">
-                <a id="saludoUsuario" class="nav-link"></a>
-              </li>
               <li class="nav-item ms-lg-2">
                 <button id="btnLogout" class="btn btn-sm mb-2">
                   Cerrar sesión
@@ -73,7 +70,7 @@
         </div>
       </nav>
     </header>
-    <main class="container min-vh-100">
+    <main class="container">
       <section class="mb-5">
         <div class="d-flex align-items-center justify-content-between mb-3">
           <h2 class="mb-0">Médicos</h2>
@@ -86,7 +83,6 @@
           </button>
         </div>
 
-        <!-- Tabla -->
         <div class="table-responsive">
           <table class="table table-striped align-middle" id="tablaMedicos">
             <thead class="table-light">
@@ -96,19 +92,15 @@
                 <th>Nombre</th>
                 <th>Matrícula</th>
                 <th>Especialidad</th>
-                <th>Teléfono</th>
-                <th>Obra Social</th>
                 <th>Email</th>
-                <th>Valor Consulta</th>
                 <th class="text-center" style="width: 110px">Acciones</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="tbodyMedicos"></tbody>
           </table>
         </div>
       </section>
 
-      <!-- Modal-->
       <div
         class="modal fade"
         id="modalMedico"
@@ -120,9 +112,7 @@
           <div class="modal-content">
             <form id="altaMedicoForm">
               <div class="modal-header">
-                <h5 class="modal-title" id="modalMedicoLabel">
-                  Alta de Médico
-                </h5>
+                <h5 class="modal-title" id="modalMedicoLabel">Alta de Médico</h5>
                 <button
                   type="button"
                   class="btn-close"
@@ -168,37 +158,7 @@
                       >Especialidad</label
                     >
                     <select class="form-select" id="especialidad" required>
-                      <option value="">Seleccione una especialidad</option>
-                    </select>
-                  </div>
-
-                  <div class="col-12">
-                    <label for="descripcion" class="form-label"
-                      >Descripción</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="descripcion"
-                      rows="2"
-                      placeholder="Opcional"
-                    ></textarea>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="telefono" class="form-label">Teléfono</label>
-                    <input
-                      type="tel"
-                      class="form-control"
-                      id="telefono"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="obraSocial" class="form-label"
-                      >Obra Social</label
-                    >
-                    <select class="form-select" id="obraSocial" required>
-                      <option value="">Seleccione una obra social</option>
+                      <option value="">Selecciona una especialidad</option>
                     </select>
                   </div>
 
@@ -212,32 +172,42 @@
                     />
                   </div>
                   <div class="col-md-6">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="telefono"
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="obraSocial" class="form-label">Obra Social</label>
+                    <select class="form-select" id="obraSocial">
+                      <option value="">Sin obra social</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
                     <label for="valorConsulta" class="form-label"
-                      >Valor de consulta</label
+                      >Valor de Consulta</label
                     >
                     <input
                       type="number"
                       class="form-control"
                       id="valorConsulta"
-                      min="0"
-                      required
+                      step="0.01"
                     />
                   </div>
 
                   <div class="col-12">
-                    <label for="imagen" class="form-label"
-                      >Foto del médico</label
+                    <label for="foto" class="form-label"
+                      >Foto (opcional)</label
                     >
                     <input
                       type="file"
-                      accept="image/*"
                       class="form-control"
-                      id="imagen"
+                      id="foto"
+                      accept="image/*"
                     />
-                    <div class="form-text">
-                      Suba una foto (opcional). Si no carga ninguna, se mostrará
-                      una imagen por defecto.
-                    </div>
                   </div>
                 </div>
               </div>
@@ -286,7 +256,7 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <!-- Modal confirmación de eliminación -->
+    
     <div
       class="modal fade"
       id="confirmDeleteModal"
@@ -308,7 +278,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            ¿Seguro que desea eliminar a
+            ¿Seguro que desea eliminar al médico
             <strong id="confirmDeleteNombre"></strong>?
           </div>
           <div class="modal-footer">
@@ -322,6 +292,7 @@
         </div>
       </div>
     </div>
+
     <script src="js/main.js"></script>
     <script src="data/medicos.js"></script>
     <script src="js/altaMedico.js"></script>

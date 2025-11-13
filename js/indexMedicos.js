@@ -33,8 +33,8 @@
     const valor = moneda(m.valorConsulta);
 
     return `
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="card h-100">
+     <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card h-100 shadow border">
           <img class="card-img-top" src="${img}" alt="${nombreCompleto}" />
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${nombreCompleto}</h5>
@@ -42,7 +42,6 @@
             <p class="card-text"><strong>Días y horarios: </strong>${dh}</p>
             <p class="card-text"><strong>Obra Social: </strong>${obra}</p>
             <p class="card-text"><strong>Valor: </strong>${valor}</p>
-            <a href="contacto.html" class="btn btn-primary mt-auto w-100">Pedir turno</a>
           </div>
         </div>
       </div>

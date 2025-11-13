@@ -95,6 +95,7 @@
               <tr>
                 <th>Nombre</th>
                 <th>Plan</th>
+                <th>Descripción</th>
                 <th>Estado</th>
                 <th class="text-center" style="width: 110px">Acciones</th>
               </tr>
@@ -145,6 +146,18 @@
                       <option value="50%">50%</option>
                       <option value="20%">20%</option>
                     </select>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="descripcion" class="form-label"
+                      >Descripción</label
+                    >
+                    <textarea
+                      id="descripcion"
+                      class="form-control"
+                      rows="2"
+                      placeholder="Breve descripción u observaciones"
+                    ></textarea>
                   </div>
 
                   <div class="col-12">
@@ -201,7 +214,7 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    
+
     <div
       class="modal fade"
       id="confirmDeleteModal"
@@ -238,7 +251,7 @@
       </div>
     </div>
     <script src="js/main.js"></script>
-   
+
     <script src="js/obraSocial.js"></script>
   </body>
 </html>

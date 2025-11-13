@@ -11,17 +11,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmDeleteNombre = document.getElementById("confirmDeleteNombre");
   const btnConfirmDelete = document.getElementById("btnConfirmDelete");
 
-  let editIndex = null;
   let deleteIndex = null;
 
   function cargarObrasSociales() {
     const raw = localStorage.getItem(KEY_OBRAS_SOCIALES);
     if (!raw) {
       const iniciales = [
-        { nombre: "OSDE", plan: "210", estado: "Activa" },
-        { nombre: "Swiss Medical", plan: "SMG20", estado: "Activa" },
-        { nombre: "Galeno", plan: "Plata", estado: "Inactiva" },
-        { nombre: "IOMA", plan: "General", estado: "Activa" },
+        {
+          nombre: "OSDE",
+          plan: "210",
+          descripcion: "Cobertura nacional con amplia cartilla médica",
+          estado: "Activa",
+        },
+        {
+          nombre: "Swiss Medical",
+          plan: "SMG20",
+          descripcion: "Atención en centros de alta complejidad",
+          estado: "Activa",
+        },
+        {
+          nombre: "Galeno",
+          plan: "Plata",
+          descripcion: "Cobertura parcial con prestadores seleccionados",
+          estado: "Inactiva",
+        },
+        {
+          nombre: "IOMA",
+          plan: "General",
+          descripcion: "Cobertura para empleados públicos de Buenos Aires",
+          estado: "Activa",
+        },
       ];
       localStorage.setItem(KEY_OBRAS_SOCIALES, JSON.stringify(iniciales));
       return [...iniciales];
@@ -45,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tablaBody.innerHTML = "";
     if (obrasSociales.length === 0) {
       tablaBody.innerHTML =
-        '<tr><td colspan="4" class="text-center">No hay obras sociales registradas.</td></tr>';
+        '<tr><td colspan="5" class="text-center">No hay obras sociales registradas.</td></tr>';
       return;
     }
 
@@ -54,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.innerHTML = `
         <td>${os.nombre}</td>
         <td>${os.plan}</td>
+        <td>${os.descripcion || "-"}</td>
         <td>
           <span class="badge ${
             os.estado === "Activa" ? "bg-success" : "bg-danger"
@@ -87,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("nombre").value = os.nombre;
     document.getElementById("plan").value = os.plan;
+    document.getElementById("descripcion").value = os.descripcion || "";
     document.getElementById("estado").value = os.estado;
 
     document.getElementById("modalObraSocialLabel").textContent =
@@ -115,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nuevaObraSocial = {
       nombre: document.getElementById("nombre").value,
       plan: document.getElementById("plan").value,
+      descripcion: document.getElementById("descripcion").value.trim(),
       estado: document.getElementById("estado").value,
     };
 

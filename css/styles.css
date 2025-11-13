@@ -182,3 +182,8 @@ section h2 {
 [data-bs-theme="dark"] .contacto .form-label {
   color: #dfe6ed;
 }
+
+.modal-turnos .modal-content {
+  max-height: 85vh; /* Altura máxima del 85% de la pantalla */
+  overflow-y: auto; /* Muestra el scroll vertical si es necesario */
+}

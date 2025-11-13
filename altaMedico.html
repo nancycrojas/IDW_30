@@ -73,7 +73,7 @@
         </div>
       </nav>
     </header>
-    <main class="container">
+    <main class="container min-vh-100">
       <section class="mb-5">
         <div class="d-flex align-items-center justify-content-between mb-3">
           <h2 class="mb-0">Médicos</h2>
@@ -167,12 +167,9 @@
                     <label for="especialidad" class="form-label"
                       >Especialidad</label
                     >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="especialidad"
-                      required
-                    />
+                    <select class="form-select" id="especialidad" required>
+                      <option value="">Seleccione una especialidad</option>
+                    </select>
                   </div>
 
                   <div class="col-12">
@@ -200,12 +197,9 @@
                     <label for="obraSocial" class="form-label"
                       >Obra Social</label
                     >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="obraSocial"
-                      required
-                    />
+                    <select class="form-select" id="obraSocial" required>
+                      <option value="">Seleccione una obra social</option>
+                    </select>
                   </div>
 
                   <div class="col-md-6">

@@ -25,6 +25,61 @@ function cargarMedicos() {
   }
 }
 
+function cargarEspecialidadesEnSelect() {
+  const selectEspecialidad = document.getElementById("especialidad");
+  if (!selectEspecialidad) return;
+
+  const raw = localStorage.getItem("especialidades");
+  if (!raw) return;
+
+  try {
+    const especialidades = JSON.parse(raw);
+    if (Array.isArray(especialidades) && especialidades.length > 0) {
+      selectEspecialidad.innerHTML =
+        '<option value="">Seleccione una especialidad</option>' +
+        especialidades
+          .map((e) => `<option value="${e.nombre}">${e.nombre}</option>`)
+          .join("");
+    }
+  } catch (error) {
+    console.error("Error al cargar especialidades:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  cargarEspecialidadesEnSelect();
+});
+
+function cargarObrasSocialesEnSelect() {
+  const selectObraSocial = document.getElementById("obraSocial");
+  if (!selectObraSocial) return;
+
+  const raw = localStorage.getItem("obrasSociales");
+  if (!raw) return;
+
+  try {
+    const obrasSociales = JSON.parse(raw);
+    if (Array.isArray(obrasSociales) && obrasSociales.length > 0) {
+      const activas = obrasSociales.filter((os) => os.estado === "Activa");
+
+      selectObraSocial.innerHTML =
+        '<option value="">Seleccione una obra social</option>' +
+        activas
+          .map(
+            (os) =>
+              `<option value="${os.nombre}">${os.nombre} (${os.plan})</option>`
+          )
+          .join("");
+    }
+  } catch (error) {
+    console.error("Error al cargar obras sociales:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  cargarObrasSocialesEnSelect();
+});
+
 function guardarMedicos(arr) {
   localStorage.setItem(KEY, JSON.stringify(arr));
 }
@@ -185,7 +240,6 @@ tbody?.addEventListener("click", (e) => {
     document.getElementById("obraSocial").value = m.obraSocial || "";
     document.getElementById("email").value = m.email || "";
     document.getElementById("valorConsulta").value = m.valorConsulta || "";
-
     document.getElementById("modalMedicoLabel").textContent = "Editar Médico";
     const btnSubmit = altaMedicoForm.querySelector("button[type='submit']");
     if (btnSubmit) btnSubmit.textContent = "Guardar cambios";

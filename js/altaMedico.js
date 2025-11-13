@@ -1,5 +1,8 @@
 verificarAutenticacion();
-const KEY = "medicos";
+
+const KEY_MEDICOS = "medicos";
+const KEY_ESPECIALIDADES = "especialidades";
+const KEY_OBRAS_SOCIALES = "obrasSociales";
 let editIndex = null;
 
 document
@@ -12,117 +15,101 @@ document
     if (btnSubmit) btnSubmit.textContent = "Guardar médico";
   });
 
-function cargarMedicos() {
-  const raw = localStorage.getItem(KEY);
-  if (!raw) {
-    localStorage.setItem(KEY, JSON.stringify(medicos));
-    return [...medicos];
-  }
-  try {
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [...medicos];
-  } catch {
-    return [...medicos];
-  }
-}
-
-function cargarEspecialidadesEnSelect() {
-  const selectEspecialidad = document.getElementById("especialidad");
-  if (!selectEspecialidad) return;
-
-  const raw = localStorage.getItem("especialidades");
-  if (!raw) return;
-
-  try {
-    const especialidades = JSON.parse(raw);
-    if (Array.isArray(especialidades) && especialidades.length > 0) {
-      selectEspecialidad.innerHTML =
-        '<option value="">Seleccione una especialidad</option>' +
-        especialidades
-          .map((e) => `<option value="${e.nombre}">${e.nombre}</option>`)
-          .join("");
-    }
-  } catch (error) {
-    console.error("Error al cargar especialidades:", error);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  cargarEspecialidadesEnSelect();
-});
-
-function cargarObrasSocialesEnSelect() {
-  const selectObraSocial = document.getElementById("obraSocial");
-  if (!selectObraSocial) return;
-
-  const raw = localStorage.getItem("obrasSociales");
-  if (!raw) return;
-
-  try {
-    const obrasSociales = JSON.parse(raw);
-    if (Array.isArray(obrasSociales) && obrasSociales.length > 0) {
-      const activas = obrasSociales.filter((os) => os.estado === "Activa");
-
-      selectObraSocial.innerHTML =
-        '<option value="">Seleccione una obra social</option>' +
-        activas
-          .map(
-            (os) =>
-              `<option value="${os.nombre}">${os.nombre} (${os.plan})</option>`
-          )
-          .join("");
-    }
-  } catch (error) {
-    console.error("Error al cargar obras sociales:", error);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  cargarObrasSocialesEnSelect();
-});
-
-function guardarMedicos(arr) {
-  localStorage.setItem(KEY, JSON.stringify(arr));
-}
-
-function convertirA64(archivo) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-    reader.readAsDataURL(archivo);
+const modalMedicoEl = document.getElementById("modalMedico");
+if (modalMedicoEl) {
+  modalMedicoEl.addEventListener("show.bs.modal", () => {
+    cargarEspecialidadesEnMedicos();
+    cargarObrasSocialesEnMedicos();
   });
 }
 
-const tbody = document.querySelector("#tablaMedicos tbody");
+function cargarEspecialidadesEnMedicos() {
+  const selectEspecialidad = document.getElementById("especialidad");
+  if (!selectEspecialidad) return;
 
-function formatearMoneda(valor) {
-  return `$ ${Number(valor).toLocaleString("es-AR")}`;
+  while (selectEspecialidad.options.length > 1) {
+    selectEspecialidad.remove(1);
+  }
+
+  const especialidades = JSON.parse(localStorage.getItem(KEY_ESPECIALIDADES)) || [];
+
+  especialidades.forEach((esp) => {
+    const option = document.createElement("option");
+    option.value = esp.nombre;
+    option.textContent = esp.nombre;
+    selectEspecialidad.appendChild(option);
+  });
 }
 
-function renderTabla(medicos) {
-  if (!tbody) return;
-  tbody.innerHTML = medicos
-    .map((m, idx) => {
+function cargarObrasSocialesEnMedicos() {
+  const selectObraSocial = document.getElementById("obraSocial");
+  if (!selectObraSocial) return;
+
+  while (selectObraSocial.options.length > 1) {
+    selectObraSocial.remove(1);
+  }
+
+  const obrasSociales = JSON.parse(localStorage.getItem(KEY_OBRAS_SOCIALES)) || [];
+
+  obrasSociales.forEach((os) => {
+    const option = document.createElement("option");
+    option.value = os.nombre;
+    option.textContent = os.nombre;
+    selectObraSocial.appendChild(option);
+  });
+}
+
+function cargarMedicos() {
+  const raw = localStorage.getItem(KEY_MEDICOS);
+  if (!raw) {
+    localStorage.setItem(KEY_MEDICOS, JSON.stringify(medicos || []));
+    return medicos || [];
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : (medicos || []);
+  } catch {
+    return medicos || [];
+  }
+}
+
+function guardarMedicos(arr) {
+  localStorage.setItem(KEY_MEDICOS, JSON.stringify(arr));
+}
+
+const tbodyMedicos = document.getElementById("tbodyMedicos");
+
+function renderTabla(medicosArr) {
+  if (!tbodyMedicos) return;
+
+  if (medicosArr.length === 0) {
+    tbodyMedicos.innerHTML = `
+      <tr>
+        <td colspan="7" class="text-center text-muted py-4">
+          <i class="bi bi-person-x fs-1 d-block mb-2"></i>
+          No hay médicos registrados
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbodyMedicos.innerHTML = medicosArr
+    .map((medico, idx) => {
       return `
         <tr>
-          <td><img src="${m.imagen}" alt="${m.nombre} ${
-        m.apellido
-      }" class="rounded" width="60" height="60"></td>
-          <td>${m.apellido}</td>
-          <td>${m.nombre}</td>
-          <td>${m.matricula}</td>
-          <td>${m.especialidad}</td>
-          <td>${m.telefono}</td>
-          <td>${m.obraSocial}</td>
-          <td>${m.email}</td>
-          <td>${formatearMoneda(m.valorConsulta)}</td>
+          <td><img src="${medico.foto || 'assets/default.png'}" alt="${medico.nombre}" style="width: 50px; height: 50px; border-radius: 50%;"></td>
+          <td>${medico.apellido}</td>
+          <td>${medico.nombre}</td>
+          <td>${medico.matricula}</td>
+          <td>${medico.especialidad}</td>
+          <td>${medico.email}</td>
           <td class="text-center">
             <div class="btn-group btn-group-sm" role="group">
-              <button class="btn btn-outline-primary" data-action="editar" data-index="${idx}">
+              <button class="btn btn-outline-primary" data-action="editar" data-index="${idx}" title="Editar">
                 <i class="bi bi-pencil"></i>
               </button>
-              <button class="btn btn-outline-danger" data-action="eliminar" data-index="${idx}">
+              <button class="btn btn-outline-danger" data-action="eliminar" data-index="${idx}" title="Eliminar">
                 <i class="bi bi-trash"></i>
               </button>
             </div>
@@ -134,42 +121,42 @@ function renderTabla(medicos) {
 }
 
 const altaMedicoForm = document.getElementById("altaMedicoForm");
-
 let medicosGuardados = cargarMedicos();
+
 renderTabla(medicosGuardados);
 
-altaMedicoForm?.addEventListener("submit", async (e) => {
+altaMedicoForm?.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const archivo = document.getElementById("imagen").files[0];
-  let imagenFinal =
-    editIndex !== null
-      ? medicosGuardados[editIndex].imagen
-      : "assets/default.jpeg";
+  const apellido = document.getElementById("apellido").value.trim();
+  const nombre = document.getElementById("nombre").value.trim();
+  const matricula = document.getElementById("matricula").value.trim();
+  const especialidad = document.getElementById("especialidad").value;
+  const email = document.getElementById("email").value.trim();
+  const telefono = document.getElementById("telefono").value.trim();
+  const obraSocial = document.getElementById("obraSocial").value || "";
+  const valorConsulta = document.getElementById("valorConsulta").value;
+  const fotoInput = document.getElementById("foto");
 
-  if (archivo) {
-    try {
-      imagenFinal = await convertirA64(archivo);
-    } catch (error) {
-      console.error("Error al convertir la imagen:", error);
-    }
+  if (!apellido || !nombre || !matricula || !especialidad || !email) {
+    alert("Por favor completa todos los campos requeridos");
+    return;
   }
 
   const payload = {
-    apellido: document.getElementById("apellido").value.trim(),
-    nombre: document.getElementById("nombre").value.trim(),
-    matricula: document.getElementById("matricula").value.trim(),
-    especialidad: document.getElementById("especialidad").value.trim(),
-    descripcion: document.getElementById("descripcion").value.trim(),
-    telefono: document.getElementById("telefono").value.trim(),
-    obraSocial: document.getElementById("obraSocial").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    valorConsulta: Number(document.getElementById("valorConsulta").value),
-    imagen: imagenFinal,
+    apellido,
+    nombre,
+    matricula,
+    especialidad,
+    email,
+    telefono,
+    obraSocial,
+    valorConsulta: parseFloat(valorConsulta) || 0,
+    foto: fotoInput.files.length > 0 ? URL.createObjectURL(fotoInput.files[0]) : "assets/default.png"
   };
 
   if (editIndex === null) {
-    medicosGuardados.push({ id: Date.now(), ...payload });
+    medicosGuardados.push({ id: Date.now().toString(), ...payload });
   } else {
     medicosGuardados[editIndex] = {
       ...medicosGuardados[editIndex],
@@ -198,7 +185,7 @@ const confirmModal = confirmModalEl
 const confirmNombreEl = document.getElementById("confirmDeleteNombre");
 const btnConfirmDelete = document.getElementById("btnConfirmDelete");
 
-tbody?.addEventListener("click", (e) => {
+tbodyMedicos?.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-action]");
   if (!btn) return;
 
@@ -208,16 +195,16 @@ tbody?.addEventListener("click", (e) => {
 
   if (action === "eliminar") {
     indexAEliminar = idx;
-    const m = medicosGuardados[idx];
+    const medico = medicosGuardados[idx];
     if (confirmNombreEl) {
-      confirmNombreEl.textContent = `${m.apellido}, ${m.nombre}`;
+      confirmNombreEl.textContent = `${medico.apellido} ${medico.nombre}`;
     }
 
     if (confirmModal) {
       confirmModal.show();
     } else {
       const ok = window.confirm(
-        `¿Eliminar al Dr./Dra. ${m.apellido}, ${m.nombre}?`
+        `¿Eliminar a ${medico.apellido} ${medico.nombre}?`
       );
       if (ok) {
         medicosGuardados.splice(idx, 1);
@@ -230,17 +217,17 @@ tbody?.addEventListener("click", (e) => {
 
   if (action === "editar") {
     editIndex = idx;
-    const m = medicosGuardados[idx];
+    const medico = medicosGuardados[idx];
 
-    document.getElementById("apellido").value = m.apellido || "";
-    document.getElementById("nombre").value = m.nombre || "";
-    document.getElementById("matricula").value = m.matricula || "";
-    document.getElementById("especialidad").value = m.especialidad || "";
-    document.getElementById("descripcion").value = m.descripcion || "";
-    document.getElementById("telefono").value = m.telefono || "";
-    document.getElementById("obraSocial").value = m.obraSocial || "";
-    document.getElementById("email").value = m.email || "";
-    document.getElementById("valorConsulta").value = m.valorConsulta || "";
+    document.getElementById("apellido").value = medico.apellido || "";
+    document.getElementById("nombre").value = medico.nombre || "";
+    document.getElementById("matricula").value = medico.matricula || "";
+    document.getElementById("especialidad").value = medico.especialidad || "";
+    document.getElementById("email").value = medico.email || "";
+    document.getElementById("telefono").value = medico.telefono || "";
+    document.getElementById("obraSocial").value = medico.obraSocial || "";
+    document.getElementById("valorConsulta").value = medico.valorConsulta || "";
+
     document.getElementById("modalMedicoLabel").textContent = "Editar Médico";
     const btnSubmit = altaMedicoForm.querySelector("button[type='submit']");
     if (btnSubmit) btnSubmit.textContent = "Guardar cambios";

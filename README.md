@@ -4,4 +4,4 @@
 - Ezequiel David Gerard
 - Nancy Clarisa Rojas
 - Jose Alfredo Strieder
-- Nadia Tolaba
+- Nadia Marianela Tolaba

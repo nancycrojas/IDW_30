@@ -31,7 +31,8 @@ function cargarEspecialidadesEnMedicos() {
     selectEspecialidad.remove(1);
   }
 
-  const especialidades = JSON.parse(localStorage.getItem(KEY_ESPECIALIDADES)) || [];
+  const especialidades =
+    JSON.parse(localStorage.getItem(KEY_ESPECIALIDADES)) || [];
 
   especialidades.forEach((esp) => {
     const option = document.createElement("option");
@@ -49,7 +50,8 @@ function cargarObrasSocialesEnMedicos() {
     selectObraSocial.remove(1);
   }
 
-  const obrasSociales = JSON.parse(localStorage.getItem(KEY_OBRAS_SOCIALES)) || [];
+  const obrasSociales =
+    JSON.parse(localStorage.getItem(KEY_OBRAS_SOCIALES)) || [];
 
   obrasSociales.forEach((os) => {
     const option = document.createElement("option");
@@ -67,7 +69,7 @@ function cargarMedicos() {
   }
   try {
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : (medicos || []);
+    return Array.isArray(parsed) ? parsed : medicos || [];
   } catch {
     return medicos || [];
   }
@@ -98,7 +100,9 @@ function renderTabla(medicosArr) {
     .map((medico, idx) => {
       return `
         <tr>
-          <td><img src="${medico.foto || 'assets/default.png'}" alt="${medico.nombre}" style="width: 50px; height: 50px; border-radius: 50%;"></td>
+          <td><img src="${medico.imagen || "assets/default.png"}" alt="${
+        medico.nombre
+      }" style="width: 50px; height: 50px; border-radius: 50%;"></td>
           <td>${medico.apellido}</td>
           <td>${medico.nombre}</td>
           <td>${medico.matricula}</td>
@@ -152,7 +156,10 @@ altaMedicoForm?.addEventListener("submit", (e) => {
     telefono,
     obraSocial,
     valorConsulta: parseFloat(valorConsulta) || 0,
-    foto: fotoInput.files.length > 0 ? URL.createObjectURL(fotoInput.files[0]) : "assets/default.png"
+    foto:
+      fotoInput.files.length > 0
+        ? URL.createObjectURL(fotoInput.files[0])
+        : "assets/default.png",
   };
 
   if (editIndex === null) {
